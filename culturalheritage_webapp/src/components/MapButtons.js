@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, useMap, Marker, Icon } from "react-leaflet";
 import L from "leaflet";
-import "./MainMap.css";
-import arrow from "../ccccc.png";
-import Button from "@material-ui/core/Button";
+import NearMe from "@material-ui/icons/NearMe";
 import { useSelector, useDispatch } from "react-redux";
 import { buttonsActions } from "../store/index.js";
+import "./MainMap.css";
+import "./MapButtons.css"
 
 const MapButtons = (props) => {
   const userLocation = useSelector((state) => state.userLocation);
@@ -30,16 +30,19 @@ const MapButtons = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <Button
-        id="geolocationbtn"
-        variant="contained"
-        color="primary"
-        onClick={handleGeolocation}
-      >
-        Get My Location
-      </Button>
-    </React.Fragment>
+    <div className="leaflet-top leaflet-right">
+      <div className="leaflet-control-layers leaflet-control" id="buttonss" aria-haspopup="true">
+        <div className="buttons_parent_div">
+          <div id="geolocationbtn">
+            <NearMe  onClick={handleGeolocation}/>
+          </div>
+          <div  id="OTHER" >
+            <NearMe onClick={handleGeolocation}/>
+          </div>
+          
+        </div>
+      </div>
+    </div>
   );
 };
 

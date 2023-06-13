@@ -2,8 +2,9 @@ h1, h2, p {
   text-align: center;
 }
 .leaflet-container {
-  height: 800px;
-  width: 90%;
-  margin: 50px auto;
+  height: 850px;
+  width: 100%;
+  margin: 20px auto;
 }
+
 

@@ -4,7 +4,6 @@ import L from "leaflet";
 import {useSelector} from 'react-redux';
 import "./MainMap.css";
 import arrow from "../ccccc.png";
-import Button from "@material-ui/core/Button";
 import MapButtons from "./MapButtons";
 
 
@@ -52,9 +51,9 @@ const MainMap = () => {
           detectRetina={true}
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url={"https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"}
-        />
-        <MapButtons />
-        {userLocation && (
+          />
+          <MapButtons />
+          {userLocation && (
           <React.Fragment>
             <ChangeMapView center={mapCenter} zoom={zoomLevel} />
           </React.Fragment>
