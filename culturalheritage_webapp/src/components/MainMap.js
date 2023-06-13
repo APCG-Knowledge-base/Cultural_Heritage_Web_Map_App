@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, useMap, Marker, Icon } from "react-leaflet";
+import { MapContainer, TileLayer, useMap, Marker } from "react-leaflet";
 import L from "leaflet";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
 import "./MainMap.css";
 import arrow from "../ccccc.png";
 import MapButtons from "./MapButtons";
-
-
+import { ZoomControl } from "react-leaflet";
+import { withWidth } from "@material-ui/core";
+import { Height } from "@material-ui/icons";
+import CCMakrer from "./CCMarker.js";
+import { ccpoints } from "../common/util.js";
 // Create a custom icon using the arrow image
 const arrowIcon = new L.Icon({
   iconUrl: arrow,
@@ -15,7 +18,7 @@ const arrowIcon = new L.Icon({
 });
 
 const MainMap = () => {
-  const userLocation = useSelector(state => state.userLocation);
+  const userLocation = useSelector((state) => state.userLocation);
   const [mapCenter, setMapCenter] = useState([50.466, 30.481]);
   const [zoomLevel, setZoomLevel] = useState(13);
 
@@ -45,21 +48,31 @@ const MainMap = () => {
   }
 
   return (
-    <React.Fragment>
-      <MapContainer center={mapCenter} zoom={zoomLevel}>
-        <TileLayer
-          detectRetina={true}
-          attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url={"https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"}
-          />
-          <MapButtons />
-          {userLocation && (
-          <React.Fragment>
-            <ChangeMapView center={mapCenter} zoom={zoomLevel} />
-          </React.Fragment>
-        )}
-      </MapContainer>
-    </React.Fragment>
+    <MapContainer
+      center={mapCenter}
+      zoom={zoomLevel}
+      className="map-container"
+      zoomControl={false}
+    >
+      <TileLayer
+        detectRetina={true}
+        url={
+          "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+        }
+        attributionPosition="bottomtop" // Set the attribution position here
+      />
+      {userLocation && <ChangeMapView center={mapCenter} zoom={zoomLevel} />}
+      <div className="btn_container" style={{ width: "5%", height: "100%" }}>
+        <MapButtons />
+      </div>
+      <div className="leaflet-top leaflet-right">
+        {" "}
+        <ZoomControl position="topright" />{" "}
+      </div>
+      {ccpoints.map((point, index) => (
+        <CCMakrer key={index} ccpoint={point} />
+      ))}
+    </MapContainer>
   );
 };
 
