@@ -6,7 +6,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import MuseumIcon from "@material-ui/icons/Museum";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBiohazard, faRadiation } from "@fortawesome/free-solid-svg-icons";
+import { faBiohazard, faRadiation, faEarthquake,faSignal,faMountain,faExclamationCircle, faLandmark,faCloud } from "@fortawesome/free-solid-svg-icons";
 import AirIcon from "@material-ui/icons/Cloud";
 import { useSelector, useDispatch } from "react-redux";
 import { buttonsActions } from "../store/index.js";
@@ -15,6 +15,8 @@ import "./MapButtons.css";
 
 const MapButtons = (props) => {
   const userLocation = useSelector((state) => state.userLocation);
+  const showEGMS = useSelector((state) => state.showEGMS);
+  const showLandcover = useSelector((state) => state.showLandcover);
   const dispatch = useDispatch();
 
   const handleGeolocation = () => {
@@ -35,6 +37,15 @@ const MapButtons = (props) => {
     }
   };
 
+
+  const handleGroundMotion = () => {
+    dispatch(buttonsActions.egms(!showEGMS));
+  }
+  const handleLandcover = () => {
+    dispatch(buttonsActions.land(!showLandcover));
+  }
+  
+
   return (
     <div className="buttons_parent_div">
       <div id="infobtn">
@@ -44,13 +55,16 @@ const MapButtons = (props) => {
         <NearMe />
       </div>
       <div id="ccbtn">
-        <MuseumIcon />
+        <FontAwesomeIcon icon={faLandmark} size="2x" />
       </div>
       <div id="airbtn">
-        <AirIcon />
+        <FontAwesomeIcon icon={faCloud} size="2x" />
       </div>
-      <div id="radiationbtn">
-        <FontAwesomeIcon icon={faRadiation} size="2x" />
+      <div id="groundmotion" onClick={handleGroundMotion}>
+        <FontAwesomeIcon icon={faMountain} size="2x" />
+      </div>
+      <div id="landusebtn">
+        <LayersIcon />
       </div>
     </div>
   );

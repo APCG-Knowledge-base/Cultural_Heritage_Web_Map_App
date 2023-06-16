@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 
-const initialState = { userLocation: null };
+const initialState = { userLocation: null, showEGMS:false,showLandcover:false,};
 
 const buttonsSlice = createSlice({
   name: "buttons",
@@ -9,6 +9,12 @@ const buttonsSlice = createSlice({
   reducers: {
     geolocation(state,action) {
       state.userLocation=action.payload
+    },
+    egms(state,action) {
+      state.showEGMS=action.payload
+    },
+    land(state,action) {
+      state.showLandcover=action.payload
     },
   },
 });
