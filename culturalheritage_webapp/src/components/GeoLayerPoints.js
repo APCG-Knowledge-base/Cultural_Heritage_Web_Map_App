@@ -52,8 +52,10 @@ const pointToLayer = (feature, latlng) => {
     dotColor = 'black';
   }
 
+ 
+
     return L.circleMarker(latlng, {
-      radius: 2,
+      radius: 1,
       fillColor: dotColor,
       color: dotColor,
       weight: 1,

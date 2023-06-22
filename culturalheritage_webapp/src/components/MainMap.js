@@ -10,7 +10,10 @@ import { ZoomControl } from "react-leaflet";
 import CCMakrer from "./CCMarker.js";
 import { ccpoints } from "../common/util.js";
 import GeoLayerPoints from "./GeoLayerPoints.js";
-import geojsonPoints from "../geoData/egmsathens1pxthinned.geojson";
+import GeoLayerPolygons from "./GeoLayerPolygons.js";
+import geojsonPoints from "../geoData/athensegms.geojson";
+import geojsonPolygons from "../geoData/athenslandusecorine.geojson";
+// import geojsonPolygons from "../geoData/test.geojson";
 
 // Create a custom icon using the arrow image
 const arrowIcon = new L.Icon({
@@ -20,10 +23,12 @@ const arrowIcon = new L.Icon({
 });
 
 const urltofetchPoints = geojsonPoints;
+const urltofetchPolygons = geojsonPolygons;
 
 const MainMap = () => {
   const userLocation = useSelector((state) => state.userLocation);
   const showEGMS = useSelector((state) => state.showEGMS);
+  const showLandcover = useSelector((state) => state.showLandcover);
   const [mapCenter, setMapCenter] = useState([37.977916, 23.724778]);
   const [zoomLevel, setZoomLevel] = useState(13);
   const dispatch = useDispatch();
@@ -36,10 +41,11 @@ const MainMap = () => {
       dispatch(buttonsActions.geolocation(null));
     }
   }, [userLocation]);
-  
+
   // Custom hook to access the map instance
   function ChangeMapView({ center, zoom }) {
     console.log("changeMapView is called");
+    console.log(userLocation);
     const map = useMap();
     map.setView(center, zoom);
     return (
@@ -54,6 +60,8 @@ const MainMap = () => {
     );
   }
 
+  const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
+  const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
   return (
     <div id="parent_of_all_div">
       <MapContainer
@@ -81,11 +89,17 @@ const MainMap = () => {
           <MapButtons />
         </div>
 
-        {showEGMS && <GeoLayerPoints urltofetch={urltofetchPoints} />}
+        {/* {showEGMS && <GeoLayerPoints urltofetch={urltofetchPoints} />} */}
+        {showEGMS && <MemoizedGeoLayerPoints urltofetch={urltofetchPoints} />}
+        {showLandcover && (
+          <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />
+        )}
 
-        {ccpoints.map((point, index) => (
-          <CCMakrer key={index} ccpoint={point} />
-        ))}
+        <div className="markers_div">
+          {ccpoints.map((point, index) => (
+            <CCMakrer key={index} ccpoint={point} />
+          ))}
+        </div>
       </MapContainer>
     </div>
   );

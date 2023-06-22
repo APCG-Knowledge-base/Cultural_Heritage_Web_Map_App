@@ -63,7 +63,7 @@ const MapButtons = (props) => {
       <div id="groundmotion" onClick={handleGroundMotion}>
         <FontAwesomeIcon icon={faMountain} size="2x" />
       </div>
-      <div id="landusebtn">
+      <div id="landusebtn" onClick={handleLandcover}>
         <LayersIcon />
       </div>
     </div>

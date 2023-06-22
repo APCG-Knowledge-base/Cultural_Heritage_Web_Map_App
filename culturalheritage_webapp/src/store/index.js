@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 
-const initialState = { userLocation: null, showEGMS:false,showLandcover:false,};
+const initialState = { userLocation: null, showEGMS:false,showLandcover:false};
 
 const buttonsSlice = createSlice({
   name: "buttons",
