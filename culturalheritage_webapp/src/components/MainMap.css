@@ -5,16 +5,20 @@ h1, h2, p {
 .leaflet-container {
   height: 100vh;
   width: 100%;
+  position: relative;
 }
 
 .parent_of_all_div{
+  display: flex;
+  flex-direction: column;
 }
 
 .btn_container {
-  width: 5%;
+  width:80px;
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 100000;
 }
+

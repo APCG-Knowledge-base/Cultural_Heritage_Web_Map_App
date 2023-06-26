@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 
-const initialState = { userLocation: null, showEGMS:false,showLandcover:false};
+const initialState = { userLocation: null, showEGMS:false,showLandcover:false, cchover:false, lndhover:false, grmhover:false, glctnhover:false, ihover:false, airpoluhover:false };
 
 const buttonsSlice = createSlice({
   name: "buttons",
@@ -15,6 +15,25 @@ const buttonsSlice = createSlice({
     },
     land(state,action) {
       state.showLandcover=action.payload
+    },
+
+    culthover(state,action) {
+      state.cchover= action.payload
+    },
+    landhover(state,action) {
+      state.lndhover= action.payload
+    },
+    grmotionhover(state,action) {
+      state.grmhover= action.payload
+    },
+    glocationhover(state,action) {
+      state.glctnhover= action.payload
+    },
+    infohover(state,action) {
+      state.ihover= action.payload
+    },
+    airhover(state,action) {
+      state.airpoluhover= action.payload
     },
   },
 });

@@ -1,11 +1,11 @@
 export const ccpoints = [
-  //Kiev
+  //Ατηενσ
   {
     x: 30.513557087552893,
     y: 50.443844662295376,
     colorfill: "#60696B",
     text: "Gymnasium (building of 1850)",
-    objectcategory: [],
+    objectcategory: [""],
     date: "",
     source: "",
     eventifo: "",
