@@ -22,3 +22,12 @@ h1, h2, p {
   z-index: 100000;
 }
 
+.details_container {
+  width:80px;
+  height: 100%;
+  position: absolute;
+  top: 20;
+  right: 20;
+  z-index: 100000;
+}
+

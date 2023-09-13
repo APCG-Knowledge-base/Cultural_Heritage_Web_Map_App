@@ -1,48 +1,150 @@
+/* AuthForm.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .form {
-  max-width: 40rem;
-  margin: 2rem auto;
+  background-color: #f4f4f4;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 500px; /* Adjust the width as needed */
+  margin: auto; /* Center horizontally */
+  margin-top: 20px;
 }
 
-.form label,
-.form input,
-.form textarea {
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+p {
+  margin: 15px 0;
+}
+
+label {
+  font-size: 1.2rem;
+  color: #666;
   display: block;
-  width: 100%;
+  margin-bottom: 5px;
 }
 
-.form input,
-.form textarea {
-  font: inherit;
-  padding: 0.25rem;
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  font-size: 1rem;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #777;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.actions button {
-  font: inherit;
-  cursor: pointer;
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
-  background-color: var(--color-gray-300);
-  color: var(--color-gray-800);
-  border: none;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .actions a {
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #3498db;
   text-decoration: none;
-  background-color: transparent;
-  color: var(--color-gray-300);
-}
-
-.actions button:hover {
-  background-color: var(--color-primary-300);
+  transition: background-color 0.3s ease-in-out;
 }
 
 .actions a:hover {
-  background-color: var(--color-gray-800);
+  background-color: #2980b9;
+}
+
+.link-swap {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.link-swap:hover {
+  color: #2980b9;
+}
+
+
+.actions a,
+.actions button { /* Apply styles to both the link and the button */
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #3498db;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer; /* Add cursor style to indicate interactivity */
+}
+
+.actions a:hover,
+.actions button:hover {
+  background-color: #2980b9;
+}
+
+.errorList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.errorItem {
+  color: #ff0000; /* Red color for error messages */
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+/* Style for success message */
+.successMessage {
+  color: #ff0000; /* Green color for success messages */
+  font-size: 1rem;
+  margin: 5px 0;
+  text-align: left;
+}
+
+/* Style for general text (your additional text) */
+.generalText {
+  color: #333;
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.gobackbtn {
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff; /* Text color */
+  border: none;
+  margin: 10px 10px;
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding around the icon */
+  font-size: 20px; /* Font size */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.gobackbtn:hover {
+  background-color: #2980b9;
 }

@@ -13,6 +13,7 @@ import GeoLayerPoints from "./GeoLayerPoints.js";
 import GeoLayerPolygons from "./GeoLayerPolygons.js";
 import geojsonPoints from "../geoData/athensegms.geojson";
 import geojsonPolygons from "../geoData/athenslandusecorine.geojson";
+import ButtonDetailed from "./ButtonDetailed.js";
 // import geojsonPolygons from "../geoData/test.geojson";
 
 // Create a custom icon using the arrow image
@@ -29,12 +30,12 @@ const MainMap = () => {
   const userLocation = useSelector((state) => state.userLocation);
   const showEGMS = useSelector((state) => state.showEGMS);
   const showLandcover = useSelector((state) => state.showLandcover);
+  const userInfo = useSelector((state) => state.userInfo);
   const [mapCenter, setMapCenter] = useState([37.977916, 23.724778]);
   const [zoomLevel, setZoomLevel] = useState(13);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Use effect is called!:", userLocation);
     if (userLocation) {
       setMapCenter([userLocation.latitude, userLocation.longitude]);
       setZoomLevel(17); // Update the zoom level here
@@ -88,6 +89,12 @@ const MainMap = () => {
         <div className="btn_container">
           <MapButtons />
         </div>
+
+        {userInfo &&
+        <div className="details_container">
+          <ButtonDetailed />
+        </div>
+        }
 
         {/* {showEGMS && <GeoLayerPoints urltofetch={urltofetchPoints} />} */}
         {showEGMS && <MemoizedGeoLayerPoints urltofetch={urltofetchPoints} />}

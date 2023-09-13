@@ -31,6 +31,17 @@
   width: 100%;
   border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
 }
+.clicked2{
+  background-color: #60696b;
+  color: #f4f4f4;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
+  font-weight: bold;
+  font-size:18px;
+  text-align: center;
+}
 
 #clicked{
   background-color: #60696b;
@@ -78,6 +89,7 @@
   border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
 }  
 
+
 #lndbtn {
   padding-top: 25px;
   padding-bottom: 25px;
@@ -100,11 +112,45 @@
   width: 100%;
   border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
 }
+.navbtn {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
+}
+.usrbtn {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
+}
+.plusbtn {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
+}
+
+.profilee{
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.2); 
+  background-color: transparent;
+  color: rgb(196, 196, 196);
+  font-weight: bold;
+  font-size:18px;
+  text-align: center;
+}
+
+.profilee:hover{
+  cursor: pointer;
+}
 
 
 #spancheck{
-  margin-top: 240px;
-  margin-bottom: 240px;
+  margin-top: 165px;
+  margin-bottom: 160px;
 }
 
 #infobtn {

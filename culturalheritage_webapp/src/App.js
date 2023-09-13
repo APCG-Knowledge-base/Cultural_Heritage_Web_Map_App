@@ -5,18 +5,21 @@ import MainMap from "./components/MainMap.js";
 import React from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet/dist/leaflet.js";
-import AuthenticationPage from "./pages/Authentication";
+import AuthenticationPage, {action as authAction} from "./pages/Authentication";
+import RootLayout from './pages/Root';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainMap />,
+    element: <RootLayout />,
     children: [
+      { index: true, element: <MainMap /> },
       {
         path: '/auth',
         element: <AuthenticationPage />,
-      }
+        action:authAction
+      },
     ]
   },
 ]);
