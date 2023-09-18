@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useMemo  } from "react";
 import { MapContainer, TileLayer, useMap, Marker } from "react-leaflet";
 import L from "leaflet";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,8 +61,21 @@ const MainMap = () => {
     );
   }
 
+  const closeDetails = () => {
+    dispatch(buttonsActions.userinfoopen(false));
+  };
+
   const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
   const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
+
+  // Use useMemo to memoize the rendering of MemoizedGeoLayerPolygons
+  const memoizedGeoLayerPolygons = useMemo(() => {
+    if (showLandcover) {
+      return <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />;
+    }
+    return null; // Return null if showLandcover is false
+  }, [showLandcover, urltofetchPolygons]);
+
   return (
     <div id="parent_of_all_div">
       <MapContainer
@@ -86,22 +99,29 @@ const MainMap = () => {
           <ZoomControl position="topright" />{" "}
         </div>
 
-        <div className="btn_container">
-          <MapButtons />
-        </div>
+        <div className="button-container">
+          <div className="details_container">
+            {userInfo && (
+              <>
+                <button onClick={closeDetails} className="btn-x">
+                  X
+                </button>
+                <ButtonDetailed />
+              </>
+            )}
+          </div>
 
-        {userInfo &&
-        <div className="details_container">
-          <ButtonDetailed />
+          <div className="btn_container">
+            <MapButtons />
+          </div>
         </div>
-        }
 
         {/* {showEGMS && <GeoLayerPoints urltofetch={urltofetchPoints} />} */}
         {showEGMS && <MemoizedGeoLayerPoints urltofetch={urltofetchPoints} />}
-        {showLandcover && (
+        {/* {showLandcover && (
           <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />
-        )}
-
+        )} */}
+        {memoizedGeoLayerPolygons}
         <div className="markers_div">
           {ccpoints.map((point, index) => (
             <CCMakrer key={index} ccpoint={point} />

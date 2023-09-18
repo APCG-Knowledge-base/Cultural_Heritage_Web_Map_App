@@ -128,7 +128,7 @@ const MapButtons = (props) => {
   const loginredirect1 = () => {
     console.log("this is the login status: ", isloggedin);
     if (isloggedin) {
-      navigate("/report_event");
+      navigate("/events");
     } else {
       navigate("/auth?mode=login");
     }
