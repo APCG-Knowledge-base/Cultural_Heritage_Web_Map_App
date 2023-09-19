@@ -68,13 +68,20 @@ const MainMap = () => {
   const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
   const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
 
-  // Use useMemo to memoize the rendering of MemoizedGeoLayerPolygons
+  // Use useMemo to memoize the rendering of MemoizedGeoLayerPolygons/Points
   const memoizedGeoLayerPolygons = useMemo(() => {
     if (showLandcover) {
       return <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />;
     }
-    return null; // Return null if showLandcover is false
+    return null; 
   }, [showLandcover, urltofetchPolygons]);
+
+  const memoizedGeoLayerPoints = useMemo(() => {
+    if (showEGMS) {
+      return <MemoizedGeoLayerPoints urltofetch={urltofetchPoints} />;
+    }
+    return null; 
+  }, [showEGMS, urltofetchPoints]);
 
   return (
     <div id="parent_of_all_div">
@@ -116,12 +123,10 @@ const MainMap = () => {
           </div>
         </div>
 
-        {/* {showEGMS && <GeoLayerPoints urltofetch={urltofetchPoints} />} */}
-        {showEGMS && <MemoizedGeoLayerPoints urltofetch={urltofetchPoints} />}
-        {/* {showLandcover && (
-          <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />
-        )} */}
+        {memoizedGeoLayerPoints}
+        
         {memoizedGeoLayerPolygons}
+
         <div className="markers_div">
           {ccpoints.map((point, index) => (
             <CCMakrer key={index} ccpoint={point} />
