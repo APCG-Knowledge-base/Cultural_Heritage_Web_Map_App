@@ -8,7 +8,7 @@ import "leaflet/dist/leaflet.js";
 import AuthenticationPage, {action as authAction} from "./pages/Authentication";
 import RootLayout from './pages/Root';
 import NewEventPage, {action as eventAction} from './pages/NewEvent';
-import { checkAuthNamestorageLoader } from "./util/auth";
+import { checkAuthNamestorageLoader,checkAuthLoader } from "./util/auth";
 
 
 const router = createBrowserRouter([
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: '/events',
         element: <NewEventPage />,
         action:eventAction,
-        loader:checkAuthNamestorageLoader,
+        loader:checkAuthLoader,
       },
     ]
   },

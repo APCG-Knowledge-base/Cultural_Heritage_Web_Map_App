@@ -14,7 +14,6 @@ export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const mode = searchParams.get("mode") || "login";
 
-
   if (mode != "login" && mode != "signup") {
     throw json({ message: "Invalid input" }, { status: 422 });
   }
@@ -44,8 +43,9 @@ export async function action({ request }) {
   }
 
   const resData = await response.json();
+  const token = resData.token;
+  localStorage.setItem("token", token);
   localStorage.setItem("userName", authData.email);
-  console.log("it is logged in")
 
   return redirect("/");
 }

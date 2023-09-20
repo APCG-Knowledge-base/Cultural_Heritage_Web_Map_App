@@ -31,13 +31,13 @@ import { json, redirect } from "react-router";
 import { useNavigate } from "react-router-dom";
 import ButtonDetailed from "./ButtonDetailed.js";
 
-
 const MapButtons = (props) => {
   const userLocation = useSelector((state) => state.userLocation);
   const showEGMS = useSelector((state) => state.showEGMS);
   const showLandcover = useSelector((state) => state.showLandcover);
   const isloggedin = useSelector((state) => state.isloggedin);
   const userInfo = useSelector((state) => state.userInfo);
+  const infoShow = useSelector((state) => state.infoShow);
   const userName = useSelector((state) => state.userName);
   const cchover = useSelector((state) => state.cchover);
   const lndhover = useSelector((state) => state.lndhover);
@@ -57,24 +57,37 @@ const MapButtons = (props) => {
   const [classesUsr, setUsr] = useState("usrbtn");
   const [classesPlus, setPlus] = useState("plusbtn");
   const [classesProfile, setProfile] = useState("profilee");
+  const [classesInfo, setInfoclass] = useState("infobtn");
   const navigate = useNavigate();
 
   useEffect(() => {
+    let t = localStorage.getItem("token");
     let l = localStorage.getItem("userName");
-    console.log(l); //check this maybe one more if for the first time that someone uses the platform!
-    if (l != "No") {
+    console.log("this is the token", t); //check this maybe one more if for the first time that someone uses the platform!
+    console.log("this is the userName", l); //check this maybe one more if for the first time that someone uses the platform!
+    if (t) {
       dispatch(buttonsActions.logincheck(true));
+    }
+    if (l) {
       dispatch(buttonsActions.setusername(l[0]));
     }
   }, []);
 
   useEffect(() => {
-    if (userInfo){
+    if (userInfo) {
       setProfile("clicked2");
-    }else{
-      setProfile("profilee")
+    } else {
+      setProfile("profilee");
     }
   }, [userInfo]);
+
+  useEffect(() => {
+    if (infoShow) {
+      setInfoclass("clicked");
+    } else {
+      setInfoclass("infobtn");
+    }
+  }, [infoShow]);
 
   const handleGeolocation = () => {
     if (navigator.geolocation) {
@@ -138,12 +151,18 @@ const MapButtons = (props) => {
   const loginredirect2 = () => {
     console.log("this is the login status: ", isloggedin);
     if (isloggedin) {
+      dispatch(buttonsActions.isinfoopen(false))
       dispatch(buttonsActions.userinfoopen(!userInfo));
-
     } else {
       navigate("/auth?mode=login");
       handleHoverloginout();
     }
+  };
+
+  const handleInfotab = () => {
+    dispatch(buttonsActions.userinfoopen(false));
+    dispatch(buttonsActions.isinfoopen(!infoShow));
+    // setProfile("profilee")
   };
 
   //HOvers
@@ -337,12 +356,13 @@ const MapButtons = (props) => {
         </div>
       )}
 
-
       <div className="btn-container">
         <InfoOutlinedIcon
           id="infobtn"
+          className={classesInfo}
           onMouseOver={handleHoverinfoin}
           onMouseOut={handleHoverifnoout}
+          onClick={handleInfotab}
         />
         {ihover && (
           <div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useMemo  } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { MapContainer, TileLayer, useMap, Marker } from "react-leaflet";
 import L from "leaflet";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ import GeoLayerPolygons from "./GeoLayerPolygons.js";
 import geojsonPoints from "../geoData/athensegms.geojson";
 import geojsonPolygons from "../geoData/athenslandusecorine.geojson";
 import ButtonDetailed from "./ButtonDetailed.js";
+import InfosTab from "./InfosTab.js";
 // import geojsonPolygons from "../geoData/test.geojson";
 
 // Create a custom icon using the arrow image
@@ -31,6 +32,7 @@ const MainMap = () => {
   const showEGMS = useSelector((state) => state.showEGMS);
   const showLandcover = useSelector((state) => state.showLandcover);
   const userInfo = useSelector((state) => state.userInfo);
+  const infoShow = useSelector((state) => state.infoShow);
   const [mapCenter, setMapCenter] = useState([37.977916, 23.724778]);
   const [zoomLevel, setZoomLevel] = useState(13);
   const dispatch = useDispatch();
@@ -64,6 +66,9 @@ const MainMap = () => {
   const closeDetails = () => {
     dispatch(buttonsActions.userinfoopen(false));
   };
+  const closeInfo = () => {
+    dispatch(buttonsActions.isinfoopen(false));
+  };
 
   const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
   const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
@@ -73,14 +78,14 @@ const MainMap = () => {
     if (showLandcover) {
       return <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />;
     }
-    return null; 
+    return null;
   }, [showLandcover, urltofetchPolygons]);
 
   const memoizedGeoLayerPoints = useMemo(() => {
     if (showEGMS) {
       return <MemoizedGeoLayerPoints urltofetch={urltofetchPoints} />;
     }
-    return null; 
+    return null;
   }, [showEGMS, urltofetchPoints]);
 
   return (
@@ -106,25 +111,30 @@ const MainMap = () => {
           <ZoomControl position="topright" />{" "}
         </div>
 
-        <div className="button-container">
+        {infoShow && (
           <div className="details_container">
-            {userInfo && (
-              <>
-                <button onClick={closeDetails} className="btn-x">
-                  X
-                </button>
-                <ButtonDetailed />
-              </>
-            )}
+            <button onClick={closeInfo} className="btn-x">
+              X
+            </button>
+            <InfosTab />
           </div>
+        )}
 
-          <div className="btn_container">
-            <MapButtons />
+        {userInfo && (
+          <div className="details_container">
+            <button onClick={closeDetails} className="btn-x">
+              X
+            </button>
+            <ButtonDetailed />
           </div>
+        )}
+
+        <div className="btn_container">
+          <MapButtons />
         </div>
 
         {memoizedGeoLayerPoints}
-        
+
         {memoizedGeoLayerPolygons}
 
         <div className="markers_div">

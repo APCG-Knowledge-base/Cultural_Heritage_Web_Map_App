@@ -28,14 +28,16 @@ h1, h2, p {
 }
 
 .details_container {
-  width:300px;
+  width:350px;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 100000;
+  z-index: 10000;
   padding-right: 80px;
 }
+
+
 
 .btn-x{
   width:70px;
@@ -44,7 +46,7 @@ h1, h2, p {
   top: 0;
   right: 0;
   z-index: 100000;
-  margin-right: 380px;
+  margin-right: 430px;
   display: inline-block;
   outline: none;
   cursor: pointer;

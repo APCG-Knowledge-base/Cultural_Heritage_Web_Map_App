@@ -7,6 +7,9 @@ import {
   json,
   redirect,
 } from "react-router-dom";
+import { getAuthToken } from '../util/auth';
+
+
 function NewEventPage() {
   return <EventForm  />;
 }
@@ -24,12 +27,15 @@ export async function action({ request }) {
     date: data.get('date'),
     description: data.get('description'),
   };
+
+  const token = getAuthToken();
   
   let url = 'http://localhost:8080/events';
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": 'Bearer ' + token
     },
     body: JSON.stringify(eventData),
   });

@@ -14,7 +14,8 @@ const initialState = {
   loginhover: false,
   addeventhover: false,
   userInfo:false,
-  userName:"No",
+  userName:false,
+  infoShow:false,
 };
 
 const buttonsSlice = createSlice({
@@ -38,6 +39,9 @@ const buttonsSlice = createSlice({
     },
     setusername(state, action) {
       state.userName = action.payload;
+    },
+    isinfoopen(state, action) {
+      state.infoShow = action.payload;
     },
 
     culthover(state, action) {

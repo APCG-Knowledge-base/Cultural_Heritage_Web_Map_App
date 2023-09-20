@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  background-color: rgb(243, 243, 243);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  height: 100vh;
+}
+
+.container p {
+  text-align: left;
+  cursor: text;
+
+}
+
+
+/* Customize text selection style */
+::selection {
+  background-color: #007bff; /* Blue background color */
+  color: #fff; /* White text color */
+}
+
+.title-section {
+  color: bold;
+  color: #3f3f3f; /* Bold color for title */
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.title-underline {
+  width: 100%;
+  height: 2px;
+  background-color: #ccc; /* Grey underline color */
+  position: absolute;
+  bottom: 0;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 0 10px;
+  color: #666; /* Grey text color for inactive buttons */
+  text-decoration: none;
+  outline: none;
+}
+
+.tab-button.active {
+  color: #007bff; /* Blue text color for active button */
+  text-decoration: underline;
+}
+
+.details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.details a {
+  color: #007bff; /* Blue link color */
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.details a:hover {
+  text-decoration: underline;
+}
