@@ -146,3 +146,29 @@ export const ccpoints = [
       "As a result of shelling, the walls and roof of the old residential building of the late XIXth or early XXth centuries were almost completely destroyed (not registered).",
   },
 ];
+
+
+export const ccAthnes = [
+  {
+    title:'Acropolis, Athens',
+    y:37.97156467028883, 
+    x:23.725839761254736,
+    objecttag:['Ancient building', 'Museum', 'Sightseeing'],
+    imgurl:'../logos/acropolis.jpg',
+    description:'The Acropolis of Athens is an ancient citadel located on a rocky outcrop above the city of Athens, Greece, and contains the remains of several ancient buildings of great architectural and historical significance, the most famous being the Parthenon. There is evidence that the hill was inhabited as early as the fourth millennium BC',
+    link:'https://www.gtp.gr/Locpage.asp?id=76',
+    colorfill:'#60696B'
+  },
+  {
+    title:'Monastery of Daphni, CHAIDARI, ATTIKI',
+    y:38.01293298958938, 
+    x:23.635945022033273,
+    objecttag:['Religious building', 'Sightseeing'],
+    imgurl:'../logos/dafni.jpg',
+    description:'Daphni or Dafni is an eleventh-century Byzantine monastery eleven kilometers (6.8 miles) northwest of central Athens in the suburb of Chaidari, south of Athinon Avenue (GR-8A). It is situated near the forest of the same name, on the Sacred Way that led to Eleusis. The forest covers about 18 km2 (7 sq mi), and surrounds a laurel grove. "Daphni" is the modern Greek name that means "laurel grove", derived from Daphneion (Lauretum).',
+    link:'https://www.gtp.gr/TDirectoryDetails.asp?ID=14829',
+    colorfill:'#60696B'
+
+  },
+
+]
