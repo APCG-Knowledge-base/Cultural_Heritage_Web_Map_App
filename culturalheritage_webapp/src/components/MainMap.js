@@ -9,6 +9,7 @@ import MapButtons from "./MapButtons";
 import { ZoomControl } from "react-leaflet";
 import CCMakrer from "./CCMarker.js";
 import { ccpoints } from "../common/util.js";
+import { ccAthnes } from "../common/util.js";
 import GeoLayerPoints from "./GeoLayerPoints.js";
 import GeoLayerPolygons from "./GeoLayerPolygons.js";
 import geojsonPoints from "../geoData/athensegms.geojson";
