@@ -138,7 +138,7 @@ const MainMap = () => {
         {memoizedGeoLayerPolygons}
 
         <div className="markers_div">
-          {ccpoints.map((point, index) => (
+          {ccAthnes.map((point, index) => (
             <CCMakrer key={index} ccpoint={point} />
           ))}
         </div>
