@@ -57,6 +57,23 @@ input[type="email"]:focus,
 input[type="password"]:focus {
   border-color: #777;
 }
+input[type="name"],
+input[type="Organization"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  font-size: 1rem;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input[type="name"]:focus,
+input[type="Organization"]:focus {
+  border-color: #777;
+}
 
 .actions {
   display: flex;

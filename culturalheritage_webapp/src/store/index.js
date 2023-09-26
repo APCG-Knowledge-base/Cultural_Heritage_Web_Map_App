@@ -6,6 +6,7 @@ const initialState = {
   showLandcover: false,
   isloggedin: false,
   cchover: false,
+  showCCinfo:false,
   lndhover: false,
   grmhover: false,
   glctnhover: false,
@@ -43,6 +44,10 @@ const buttonsSlice = createSlice({
     isinfoopen(state, action) {
       state.infoShow = action.payload;
     },
+    isccinfoopen(state, action) {
+      state.showCCinfo = action.payload;
+    },
+
 
     culthover(state, action) {
       state.cchover = action.payload;

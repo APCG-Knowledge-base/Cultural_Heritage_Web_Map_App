@@ -1,0 +1,11 @@
+/* CCMarker.css */
+.custom-marker-icon {
+  width: 26px; /* Adjust the size of the circle marker */
+  height: 26px; /* Adjust the size of the circle marker */
+}
+
+.custom-marker-icon svg {
+  width: 14px; /* Adjust the size of the icon inside the marker */
+  height: 14px; /* Adjust the size of the icon inside the marker */
+  cursor: pointer;
+}

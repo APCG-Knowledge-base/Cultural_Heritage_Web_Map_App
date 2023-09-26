@@ -11,6 +11,7 @@ import NewEventPage, {action as eventAction} from './pages/NewEvent';
 import { checkAuthNamestorageLoader,checkAuthLoader } from "./util/auth";
 
 
+
 const router = createBrowserRouter([
   {
     path: '/',

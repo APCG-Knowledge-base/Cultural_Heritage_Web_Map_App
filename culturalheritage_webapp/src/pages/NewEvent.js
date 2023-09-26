@@ -22,6 +22,7 @@ export async function action({ request }) {
 
   const data = await request.formData();
   const eventData = {
+    monument_reference: data.get('monument'),
     title: data.get('title'),
     image: data.get('image'),
     date: data.get('date'),

@@ -63,8 +63,6 @@ const MapButtons = (props) => {
   useEffect(() => {
     let t = localStorage.getItem("token");
     let l = localStorage.getItem("userName");
-    console.log("this is the token", t); //check this maybe one more if for the first time that someone uses the platform!
-    console.log("this is the userName", l); //check this maybe one more if for the first time that someone uses the platform!
     if (t) {
       dispatch(buttonsActions.logincheck(true));
     }

@@ -7,8 +7,7 @@ import "./MainMap.css";
 import arrow from "../ccccc.png";
 import MapButtons from "./MapButtons";
 import { ZoomControl } from "react-leaflet";
-import CCMakrer from "./CCMarker.js";
-import { ccpoints } from "../common/util.js";
+import CCMarker from "./CCMarker.js";
 import { ccAthnes } from "../common/util.js";
 import GeoLayerPoints from "./GeoLayerPoints.js";
 import GeoLayerPolygons from "./GeoLayerPolygons.js";
@@ -33,6 +32,7 @@ const MainMap = () => {
   const showEGMS = useSelector((state) => state.showEGMS);
   const showLandcover = useSelector((state) => state.showLandcover);
   const userInfo = useSelector((state) => state.userInfo);
+  const showCCinfo = useSelector((state) => state.showCCinfo);
   const infoShow = useSelector((state) => state.infoShow);
   const [mapCenter, setMapCenter] = useState([37.977916, 23.724778]);
   const [zoomLevel, setZoomLevel] = useState(13);
@@ -70,6 +70,11 @@ const MainMap = () => {
   const closeInfo = () => {
     dispatch(buttonsActions.isinfoopen(false));
   };
+
+  // const ccInfoHandler = () => {
+  //   console.log("hello")
+  //   dispatch(buttonsActions.isccinfoopen(true));
+  // };
 
   const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
   const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
@@ -140,8 +145,16 @@ const MainMap = () => {
 
         <div className="markers_div">
           {ccAthnes.map((point, index) => (
-            <CCMakrer key={index} ccpoint={point} />
+            <CCMarker key={index} ccpoint={point}  />
           ))}
+          {showCCinfo && (
+            <div className="details_container">
+              <button onClick={closeDetails} className="btn-x">
+                X
+              </button>
+              <ButtonDetailed />
+            </div>
+          )}
         </div>
       </MapContainer>
     </div>

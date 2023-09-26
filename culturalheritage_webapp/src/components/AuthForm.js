@@ -4,14 +4,13 @@ import {
   useSearchParams,
   useActionData,
   useNavigation,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
 import classes from "./AuthForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { buttonsActions } from "../store/index.js";
-
 
 function AuthForm() {
   const [searchParams] = useSearchParams();
@@ -23,9 +22,9 @@ function AuthForm() {
   const navigate = useNavigate();
 
   const gohomepage = () => {
-    console.log("this is the login status: ", isloggedin)
-    navigate('/');
-  }
+    console.log("this is the login status: ", isloggedin);
+    navigate("/");
+  };
 
   return (
     <>
@@ -49,6 +48,23 @@ function AuthForm() {
         {data && data.message && (
           <p className={classes.successMessage}>{data.message}</p>
         )}
+        {!isLogin && (
+          <>
+            <p>
+              <label htmlFor="name">Name</label>
+              <input id="name" type="name" name="name" required />
+            </p>
+            <p>
+              <label htmlFor="Organization">Organization</label>
+              <input
+                id="Organization"
+                type="Organization"
+                name="Organization"
+                required
+              />
+            </p>
+          </>
+        )}
         <p>
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" required />
@@ -57,6 +73,12 @@ function AuthForm() {
           <label htmlFor="image">Password</label>
           <input id="password" type="password" name="password" required />
         </p>
+        {!isLogin && (
+          <p>
+            <label htmlFor="image">Repeat Password</label>
+            <input id="password" type="password" name="password" required />
+          </p>
+        )}
         <div className={classes.actions}>
           <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
             {isLogin ? "Sign up" : "Login"}

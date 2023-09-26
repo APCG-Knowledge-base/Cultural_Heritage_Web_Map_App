@@ -39,6 +39,7 @@ label {
   margin-bottom: 5px;
 }
 
+select[type="text"],
 input[type="text"],
 input[type="url"],
 input[type="date"],
@@ -54,6 +55,7 @@ textarea {
   transition: border-color 0.3s ease-in-out;
 }
 
+select[type="text"]:focus,
 input[type="text"]:focus,
 input[type="url"]:focus,
 input[type="date"]:focus,

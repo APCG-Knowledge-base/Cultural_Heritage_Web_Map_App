@@ -6,14 +6,18 @@ import {
   json,
   redirect,
 } from "react-router-dom";
+import { ccAthnes } from "../common/util.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import classes from "./EventForm.module.css";
+import React, { useState } from "react";
+
 
 function EventForm({ event }) {
   const data = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const [selectedTitle, setSelectedTitle] = useState(event ? event.title : ""); // Initialize with event title
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -21,6 +25,12 @@ function EventForm({ event }) {
     navigate("/");
   }
 
+  function titleHandler(e) {
+    setSelectedTitle(e.target.value)
+  }
+
+
+  
   return (
     <>
       <FontAwesomeIcon
@@ -37,6 +47,26 @@ function EventForm({ event }) {
             ))}
           </ul>
         )}
+
+        <p>
+          <label htmlFor="monument">Select a monument</label>
+          <select
+            id="monument"
+            type="text"
+            name="monument"
+            required
+            value={selectedTitle} 
+            onChange={titleHandler}
+          >
+            <option value="" disabled>Select a monument</option>
+            {ccAthnes.map((item) => (
+              <option key={item.title} value={item.title}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </p>
+
         <p>
           <label htmlFor="title">Title</label>
           <input
@@ -91,42 +121,3 @@ function EventForm({ event }) {
 }
 
 export default EventForm;
-
-// export async function action({ request, params }) {
-//   console.log("hi")
-//   const method = request.method;
-//   const data = await request.formData();
-//   console.log(method)
-//   const eventData = {
-//     title: data.get('title'),
-//     image: data.get('image'),
-//     date: data.get('date'),
-//     description: data.get('description'),
-//   };
-
-//   let url = 'http://localhost:8080/events';
-
-//   if (method === 'PATCH') {
-//     const eventId = params.eventId;
-//     url = 'http://localhost:8080/events/' + eventId;
-//   }
-
-//   const response = await fetch(url, {
-//     method: method,
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(eventData),
-//   });
-
-//   console.log(response);
-//   if (response.status === 422) {
-//     return response;
-//   }
-
-//   if (!response.ok) {
-//     throw json({ message: 'Could not save event.' }, { status: 500 });
-//   }
-
-//   return redirect('/events');
-// }
