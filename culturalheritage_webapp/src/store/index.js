@@ -6,7 +6,7 @@ const initialState = {
   showLandcover: false,
   isloggedin: false,
   cchover: false,
-  showCCinfo:false,
+  showCCinfo: false,
   lndhover: false,
   grmhover: false,
   glctnhover: false,
@@ -14,9 +14,21 @@ const initialState = {
   airpoluhover: false,
   loginhover: false,
   addeventhover: false,
-  userInfo:false,
-  userName:false,
-  infoShow:false,
+  userInfo: false,
+  userName: false,
+  infoShow: false,
+  selectedMonument: {
+    title: "-",
+    y: "-",
+    x: "-",
+    objecttag: "-",
+    other_tags: "-",
+    date: "-",
+    imgurl: "-",
+    description: "-",
+    link: "-",
+    colorfill: "-",
+  },
 };
 
 const buttonsSlice = createSlice({
@@ -47,6 +59,10 @@ const buttonsSlice = createSlice({
     isccinfoopen(state, action) {
       state.showCCinfo = action.payload;
     },
+    monumentselection(state, action) {
+      state.selectedMonument = action.payload;
+    },
+
 
 
     culthover(state, action) {

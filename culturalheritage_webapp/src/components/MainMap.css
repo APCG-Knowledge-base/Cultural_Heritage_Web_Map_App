@@ -27,9 +27,7 @@ h1, h2, p {
   z-index: 100000;
 }
 
-.markers_div{
-  z-index: 10000;
-}
+
 
 .details_container {
   width:350px;
@@ -39,8 +37,8 @@ h1, h2, p {
   right: 0;
   z-index: 10000;
   padding-right: 80px;
+  
 }
-
 
 
 .btn-x{
@@ -66,6 +64,62 @@ h1, h2, p {
   background-color: #4f545c;
   transition: background-color .17s ease,color .17s ease;
 }
+
+
+.trapezium {
+  width: 80px; /* Set the width to 0 */
+  border-left: 50px solid transparent; /* Adjust the left side width */
+  border-right: 50px solid transparent; /* Adjust the right side width */
+  border-bottom: 100px solid #2a3539;; /* Adjust the height and color */
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 25% 100%); /* Define trapezium shape using clip-path */
+  transform: rotate(90deg); /* Rotate the trapezium by 180 degrees */
+  height: 0; /* Set the height to 0 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 360px;
+  margin-top: 461px;
+  cursor: pointer;
+
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #ffffff; /* You can change the color if needed */
+  position: absolute;
+  top: 55%;
+  left: -10px; /* Adjust this value to control the distance between the arrow and the trapezium */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.cc_info_container{
+  width:380px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  padding-right: 105px;
+  color: white;
+
+}
+
+.marker_wrapper {
+  width: 40px; /* Set the width and height according to your requirements */
+  height: 40px;
+  background-color: grey;
+  border-radius: 50%; /* This makes it a circle */
+  margin: 5px; /* Adjust the margin as needed */
+  position: relative;
+  z-index: 100000;
+
+}
+
+
 
 
 

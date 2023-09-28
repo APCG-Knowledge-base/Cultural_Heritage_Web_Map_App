@@ -25,7 +25,7 @@ function ButtonDetailed() {
       <div>
         Email: chchatzidiakos@outlook.com
       </div>
-      <button onClick={closeDetails2}>Log Out</button>
+      <button className='logout-button' onClick={closeDetails2}>Log Out</button>
     </div>
   );
 }

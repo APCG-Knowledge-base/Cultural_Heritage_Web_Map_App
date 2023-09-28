@@ -1,0 +1,80 @@
+.titlecc {
+  font-family: 'Roboto', sans-serif;
+  padding: 14px;
+  background-color: #2a3539;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to the left */
+  justify-content: flex-start; /* Align text to the top */
+  margin: 0; /* Remove default margin */
+  color: #fff; /* Set text color to white */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+/* Add styles for the h1 element */
+.titlecc h1 {
+  margin: 0; 
+  padding: 20px;
+  font-size: 24px; 
+  text-align: left; 
+  font-weight: bold;
+
+}
+
+.iconcc {
+  padding-left: 10px;
+}
+/* 
+.titlecc h2{
+  padding: -10px 250px;
+  font-size: 16px; 
+  text-align: left; 
+  font-weight: bold;
+
+} */
+
+
+.titlecc h3 {
+  padding: 20px;  
+  font-size: 12px; 
+  text-align: left; 
+  font-weight: normal;
+  font-style: italic;
+  margin-top: -19px;
+}
+
+.titlecc p {
+  padding: 20px;  
+  margin-top: 5px; 
+  font-size: 16px; 
+  text-align: left; 
+}
+
+.datecc{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  text-align: left;
+  padding-left: 20px;
+  margin-top:250px;
+  font-size:15px;
+}
+.moreinfocc{
+  padding-top: 0px;
+  margin-top: 0px;
+  text-align: left;
+  padding-left: 20px;
+  font-size:15px;
+
+
+}
+
+.titlecc a {
+  font-size:10px;
+}
+
+.titlecc span{
+  display: inline-block;
+}

@@ -7,6 +7,7 @@ import {
   redirect,
 } from "react-router-dom";
 import { ccAthnes } from "../common/util.js";
+import { ccpoints } from "../common/util.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import classes from "./EventForm.module.css";
@@ -59,7 +60,7 @@ function EventForm({ event }) {
             onChange={titleHandler}
           >
             <option value="" disabled>Select a monument</option>
-            {ccAthnes.map((item) => (
+            {ccpoints.map((item) => (
               <option key={item.title} value={item.title}>
                 {item.title}
               </option>

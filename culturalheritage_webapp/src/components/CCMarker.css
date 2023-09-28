@@ -1,11 +1,17 @@
 /* CCMarker.css */
 .custom-marker-icon {
-  width: 26px; /* Adjust the size of the circle marker */
-  height: 26px; /* Adjust the size of the circle marker */
+  width: 20px; /* Adjust the size of the circle marker */
+  height: 20px; /* Adjust the size of the circle marker */
+  color: #ffffff;
+
 }
 
 .custom-marker-icon svg {
-  width: 14px; /* Adjust the size of the icon inside the marker */
-  height: 14px; /* Adjust the size of the icon inside the marker */
+  width: 12px; /* Adjust the size of the icon inside the marker */
+  height: 12px; /* Adjust the size of the icon inside the marker */
   cursor: pointer;
+  margin-bottom: 18px;
+}
+.custom-marker-icon {
+  position: relative;
 }

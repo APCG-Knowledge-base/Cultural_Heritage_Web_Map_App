@@ -150,6 +150,7 @@ const MapButtons = (props) => {
     console.log("this is the login status: ", isloggedin);
     if (isloggedin) {
       dispatch(buttonsActions.isinfoopen(false))
+      dispatch(buttonsActions.isccinfoopen(false))
       dispatch(buttonsActions.userinfoopen(!userInfo));
     } else {
       navigate("/auth?mode=login");
@@ -159,6 +160,7 @@ const MapButtons = (props) => {
 
   const handleInfotab = () => {
     dispatch(buttonsActions.userinfoopen(false));
+    dispatch(buttonsActions.isccinfoopen(false));
     dispatch(buttonsActions.isinfoopen(!infoShow));
     // setProfile("profilee")
   };

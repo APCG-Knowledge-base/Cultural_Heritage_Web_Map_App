@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { MapContainer, TileLayer, useMap, Marker } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+  Marker,
+  CircleMarker,
+} from "react-leaflet";
 import L from "leaflet";
 import { useSelector, useDispatch } from "react-redux";
 import { buttonsActions } from "../store/index.js";
@@ -9,11 +15,13 @@ import MapButtons from "./MapButtons";
 import { ZoomControl } from "react-leaflet";
 import CCMarker from "./CCMarker.js";
 import { ccAthnes } from "../common/util.js";
+import { ccpoints } from "../common/util.js";
 import GeoLayerPoints from "./GeoLayerPoints.js";
 import GeoLayerPolygons from "./GeoLayerPolygons.js";
 import geojsonPoints from "../geoData/athensegms.geojson";
 import geojsonPolygons from "../geoData/athenslandusecorine.geojson";
 import ButtonDetailed from "./ButtonDetailed.js";
+import CCinfo from "./CCinfo.js";
 import InfosTab from "./InfosTab.js";
 // import geojsonPolygons from "../geoData/test.geojson";
 
@@ -70,6 +78,11 @@ const MainMap = () => {
   const closeInfo = () => {
     dispatch(buttonsActions.isinfoopen(false));
   };
+  const closeCCinfo = () => {
+    dispatch(buttonsActions.isccinfoopen(false));
+  };
+
+
 
   // const ccInfoHandler = () => {
   //   console.log("hello")
@@ -144,15 +157,26 @@ const MainMap = () => {
         {memoizedGeoLayerPolygons}
 
         <div className="markers_div">
-          {ccAthnes.map((point, index) => (
-            <CCMarker key={index} ccpoint={point}  />
+          {ccpoints.map((point, index) => (
+            <CircleMarker
+              key={index}
+              center={[point.y, point.x]}
+              radius={12}
+              color={"#333333"}
+              fillColor={"#333333"}
+              fillOpacity={1}
+              stroke={true}
+              weight={2}
+            >
+              <CCMarker key={index} ccpoint={point} />
+            </CircleMarker>
           ))}
           {showCCinfo && (
-            <div className="details_container">
-              <button onClick={closeDetails} className="btn-x">
-                X
-              </button>
-              <ButtonDetailed />
+            <div className="cc_info_container">
+              <div onClick={closeCCinfo} className="trapezium"></div>
+              <div className="arrow-left" onClick={closeCCinfo}></div>
+
+              <CCinfo/>
             </div>
           )}
         </div>
