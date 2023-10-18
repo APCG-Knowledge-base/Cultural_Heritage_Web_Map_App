@@ -1,4 +1,6 @@
-h1, h2, p {
+h1,
+h2,
+p {
   text-align: center;
 }
 
@@ -8,7 +10,7 @@ h1, h2, p {
   position: relative;
 }
 
-.parent_of_all_div{
+.parent_of_all_div {
   display: flex;
   flex-direction: column;
 }
@@ -19,7 +21,7 @@ h1, h2, p {
 }
 
 .btn_container {
-  width:80px;
+  width: 80px;
   height: 100%;
   position: absolute;
   top: 0;
@@ -27,22 +29,18 @@ h1, h2, p {
   z-index: 100000;
 }
 
-
-
 .details_container {
-  width:350px;
+  width: 350px;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
   z-index: 10000;
   padding-right: 80px;
-  
 }
 
-
-.btn-x{
-  width:70px;
+.btn-x {
+  width: 70px;
   height: 5%;
   position: absolute;
   top: 0;
@@ -62,25 +60,28 @@ h1, h2, p {
   border: none;
   color: #fff;
   background-color: #4f545c;
-  transition: background-color .17s ease,color .17s ease;
+  transition: background-color 0.17s ease, color 0.17s ease;
 }
-
 
 .trapezium {
   width: 80px; /* Set the width to 0 */
   border-left: 50px solid transparent; /* Adjust the left side width */
   border-right: 50px solid transparent; /* Adjust the right side width */
-  border-bottom: 100px solid #2a3539;; /* Adjust the height and color */
-  clip-path: polygon(0 0, 100% 0, 75% 100%, 25% 100%); /* Define trapezium shape using clip-path */
+  border-bottom: 100px solid #2a3539; /* Adjust the height and color */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    75% 100%,
+    25% 100%
+  ); /* Define trapezium shape using clip-path */
   transform: rotate(90deg); /* Rotate the trapezium by 180 degrees */
   height: 0; /* Set the height to 0 */
   position: absolute;
   top: 0;
   right: 0;
-  margin-right: 360px;
+  margin-right: 410px;
   margin-top: 461px;
   cursor: pointer;
-
 }
 
 .arrow-left {
@@ -91,21 +92,21 @@ h1, h2, p {
   border-right: 8px solid #ffffff; /* You can change the color if needed */
   position: absolute;
   top: 55%;
-  left: -10px; /* Adjust this value to control the distance between the arrow and the trapezium */
+  left: -15px; /* Adjust this value to control the distance between the arrow and the trapezium */
   transform: translateY(-50%);
   cursor: pointer;
 }
 
-.cc_info_container{
-  width:380px;
+.cc_info_container {
+  width: 420px;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
   z-index: 10000;
-  padding-right: 105px;
+  padding-right: 107px;
+  border-right: 0.1px solid rgba(255, 255, 255, 0.2);
   color: white;
-
 }
 
 .marker_wrapper {
@@ -116,11 +117,4 @@ h1, h2, p {
   margin: 5px; /* Adjust the margin as needed */
   position: relative;
   z-index: 100000;
-
 }
-
-
-
-
-
-

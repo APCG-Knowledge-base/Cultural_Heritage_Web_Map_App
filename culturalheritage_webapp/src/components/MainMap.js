@@ -24,7 +24,6 @@ import ButtonDetailed from "./ButtonDetailed.js";
 import CCinfo from "./CCinfo.js";
 import InfosTab from "./InfosTab.js";
 // import geojsonPolygons from "../geoData/test.geojson";
-
 // Create a custom icon using the arrow image
 const arrowIcon = new L.Icon({
   iconUrl: arrow,
@@ -42,8 +41,8 @@ const MainMap = () => {
   const userInfo = useSelector((state) => state.userInfo);
   const showCCinfo = useSelector((state) => state.showCCinfo);
   const infoShow = useSelector((state) => state.infoShow);
-  const [mapCenter, setMapCenter] = useState([37.977916, 23.724778]);
-  const [zoomLevel, setZoomLevel] = useState(13);
+  const [mapCenter, setMapCenter] = useState([50.383234, 30.411789]);
+  const [zoomLevel, setZoomLevel] = useState(7);
   const dispatch = useDispatch();
 
   useEffect(() => {

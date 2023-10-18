@@ -1,5 +1,4 @@
 .titlecc {
-  font-family: 'Roboto', sans-serif;
   padding: 14px;
   background-color: #2a3539;
   height: 100%;
@@ -14,28 +13,39 @@
   overflow-y: auto; /* Enable vertical scrolling if content overflows */
 }
 
+.tags-container{
+  display: flex;
+}
+
+
 /* Add styles for the h1 element */
-.titlecc h1 {
+.titleinfocc{
   margin: 0; 
   padding: 20px;
-  font-size: 24px; 
+  font-size: 26px; 
   text-align: left; 
   font-weight: bold;
+  padding-bottom: 5px; 
+
 
 }
+
+.titlecc h2{
+  font-family: 'Pacifico', cursive;
+  font-weight: normal;
+  padding: 20px;
+  margin: 0; 
+  padding-top: 0; 
+  font-size: 15px; 
+
+
+
+}
+
 
 .iconcc {
   padding-left: 10px;
 }
-/* 
-.titlecc h2{
-  padding: -10px 250px;
-  font-size: 16px; 
-  text-align: left; 
-  font-weight: bold;
-
-} */
-
 
 .titlecc h3 {
   padding: 20px;  
@@ -49,16 +59,20 @@
 .titlecc p {
   padding: 20px;  
   margin-top: 5px; 
-  font-size: 16px; 
+  font-size: 15px; 
   text-align: left; 
 }
 
+.othercc{
+  position:absolute;
+  bottom: 0;
+}
 .datecc{
   padding-bottom: 0px;
   margin-bottom: 0px;
   text-align: left;
   padding-left: 20px;
-  margin-top:250px;
+  /* margin-top:250px; */
   font-size:15px;
 }
 .moreinfocc{
@@ -67,6 +81,7 @@
   text-align: left;
   padding-left: 20px;
   font-size:15px;
+  margin-bottom: 50px;
 
 
 }
@@ -77,4 +92,43 @@
 
 .titlecc span{
   display: inline-block;
+}
+
+
+.img-container {
+  display: flex; /* Display images in a row */
+  align-items: center; /* Vertically center images */
+}
+
+/* Style for individual images */
+.img-container img {
+  width: 150px; /* Set the maximum width for the images */
+  padding:0px 20px;
+  cursor: pointer;
+
+}
+
+.enlarged-image {
+  max-width: 100%; /* Ensure the image fits within the viewport */
+  max-height: 80vh; /* Limit the maximum height to 80% of the viewport height */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9999; /* Ensure the image appears on top of other content */
+  cursor: zoom-out; /* Show a zoom-out cursor to indicate it can be closed */
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  backdrop-filter: blur(5px); /* Apply blur effect to the backdrop */
+  z-index: 9998; /* Ensure the backdrop appears behind the enlarged image */
+  cursor: pointer; /* Show a pointer cursor to indicate it can be clicked */
 }

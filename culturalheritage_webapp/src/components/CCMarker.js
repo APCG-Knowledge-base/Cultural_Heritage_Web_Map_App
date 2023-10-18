@@ -10,16 +10,20 @@ import {
   faMapMarkedAlt,
   faUniversity,
   faColumns,
-  faHistory,
   faLandmark,
   faBuilding,
   faCompass,
   faBook,
   faChurch,
-  faTheaterMasks 
+  faTheaterMasks,
+  faScroll,
+  faHistory,
+  faMap,
+  faGlobe,
+  faMonument,
 } from "@fortawesome/free-solid-svg-icons";
 import { buttonsActions } from "../store/index.js";
-
+import { findEvents } from "../common/util.js";
 import "./CCMarker.css"; // Import your custom CSS file
 
 const CCMarker = (props) => {
@@ -32,20 +36,21 @@ const CCMarker = (props) => {
   };
 
   const monumentHandlerselection = (p) =>{
+    // const final_point = findEvents(p)
     dispatch(buttonsActions.monumentselection(p))
   }
 
   const getIcon = (ccpoint) => {
-    if (ccpoint.objecttag[0] === "Monument" || ccpoint.objecttag[0] === "Ancient buildings") {
+    if (ccpoint.objecttag[0] === "Ancient buildings") {
       return faMuseum;
     }
-    if (ccpoint.objecttag[0] === "Archaeological site") {
-      return faColumns;
+    if (ccpoint.objecttag[0] === "Monuments") {
+      return faMonument;
     }
-    if (ccpoint.objecttag[0] === "Landscape of natural beauty") {
-      return faLeaf;
+    if (ccpoint.objecttag[0] === "Libraries") {
+      return faScroll;
     }
-    if (ccpoint.objecttag[0] === "Historical Place" || ccpoint.objecttag[0] === "Sightseeing") {
+    if (ccpoint.objecttag[0] === "Sightseeing") {
       return faMapMarkedAlt;
     }
     if (ccpoint.objecttag[0] === "Religious Buildings") {
