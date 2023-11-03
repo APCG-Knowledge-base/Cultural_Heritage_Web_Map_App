@@ -30,6 +30,8 @@ import { LocationOnOutlined } from "@material-ui/icons";
 import { json, redirect } from "react-router";
 import { useNavigate } from "react-router-dom";
 import ButtonDetailed from "./ButtonDetailed.js";
+import { aq_devices } from "../common/util.js";
+
 
 const MapButtons = (props) => {
   const userLocation = useSelector((state) => state.userLocation);
@@ -38,6 +40,7 @@ const MapButtons = (props) => {
   const isloggedin = useSelector((state) => state.isloggedin);
   const userInfo = useSelector((state) => state.userInfo);
   const infoShow = useSelector((state) => state.infoShow);
+  const no2Show = useSelector((state) => state.no2Show);
   const userName = useSelector((state) => state.userName);
   const cchover = useSelector((state) => state.cchover);
   const lndhover = useSelector((state) => state.lndhover);
@@ -116,6 +119,9 @@ const MapButtons = (props) => {
   const handleGroundMotion = () => {
     dispatch(buttonsActions.egms(!showEGMS));
     dispatch(buttonsActions.land(false));
+    dispatch(buttonsActions.no2(false));
+    dispatch(buttonsActions.setno2List([]));
+
     if (!showEGMS) {
       setGrm("clicked");
     } else {
@@ -124,17 +130,113 @@ const MapButtons = (props) => {
     setLand("lndbtn");
     setAir("airbtn");
   };
+
   const handleLandcover = () => {
     dispatch(buttonsActions.land(!showLandcover));
     setGrm("grmbtn");
     setAir("airbtn");
     dispatch(buttonsActions.egms(false));
+    dispatch(buttonsActions.no2(false));
+    dispatch(buttonsActions.setno2List([]));
+
     if (!showLandcover) {
       setLand("clicked");
     } else {
       setLand("lndbtn");
     }
   };
+
+  const no2Handler = () => {
+    dispatch(buttonsActions.no2(!no2Show));
+    setGrm("grmbtn");
+    setLand("lndbtn");
+    dispatch(buttonsActions.land(false));
+    dispatch(buttonsActions.egms(false));
+    if (!no2Show) {
+      setAir("clicked");
+      Promise.all(
+        aq_devices
+          .filter((device) => device.pollutant.includes("no2"))
+          .map((device) => getairdatano2(device))
+      ).then((results) => {
+        dispatch(buttonsActions.setno2List(results));
+      });  
+    } else {
+      setAir("airbtn");
+      dispatch(buttonsActions.setno2List([]));
+    }
+  };
+
+  const getairdatano2 = async (device) => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so we add 1 and pad with '0' if necessary
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    const base_url = `https://www.saveecobot.com/en/maps/marker.json?marker_id=${device.id}&marker_type=device&pollutant=no2_ppb&rand=${formattedDate}`;
+    const x = device.x;
+    const y = device.y;
+    const id = device.id;
+    try {
+      const res = await fetch(base_url); ///
+      const data = await res.json();
+      const objectArray = Object.entries(data.history);
+      const device_content = data.content;
+      const historical_data = data.history;
+      let color;
+      let txt_lvl;
+      let device_value;
+      let device_last_date;
+      if (objectArray.length > 0) {
+        // Get the last entry in the array
+        const [lastKey, lastValue] = objectArray[objectArray.length - 1];
+        device_value = lastValue;
+        device_last_date = lastKey;
+        if (device_value >= 0 && device_value <= 53) {
+          color = "green";
+          txt_lvl = "good level";
+        } else if (device_value >= 54 && device_value <= 100) {
+          color = "yellow";
+          txt_lvl = "moderate level";
+        } else if (device_value >= 101 && device_value <= 380) {
+          color = "orange";
+          txt_lvl = "unhealthy for sensitives level";
+        } else if (device_value >= 381 && device_value <= 649) {
+          color = "red";
+          txt_lvl = "unhealthy level";
+        } else if (device_value >= 650 && device_value <= 1249) {
+          color = "purple";
+          txt_lvl = "very unhealthy level";
+        } else if (device_value >= 1250) {
+          color = "black";
+          txt_lvl = "hazardous level";
+        }
+      } else {
+        console.log("Object is empty.");
+        color = "grey";
+        txt_lvl = "not available";
+        device_value = "-";
+        device_last_date = " ";
+        historical_data = " ";
+        device_content = " ";
+      }
+      const new_object = {
+        id: id,
+        x: x,
+        y: y,
+        color: color,
+        device_content: device_content,
+        device_value: device_value,
+        device_last_date: device_last_date,
+        historical_data: historical_data,
+      };
+      return new_object;
+    } catch (err) {
+      console.log("here is an error", err);
+      return null;
+    }
+  };
+
 
   const loginredirect1 = () => {
     console.log("this is the login status: ", isloggedin);
@@ -149,8 +251,8 @@ const MapButtons = (props) => {
   const loginredirect2 = () => {
     console.log("this is the login status: ", isloggedin);
     if (isloggedin) {
-      dispatch(buttonsActions.isinfoopen(false))
-      dispatch(buttonsActions.isccinfoopen(false))
+      dispatch(buttonsActions.isinfoopen(false));
+      dispatch(buttonsActions.isccinfoopen(false));
       dispatch(buttonsActions.userinfoopen(!userInfo));
     } else {
       navigate("/auth?mode=login");
@@ -238,10 +340,12 @@ const MapButtons = (props) => {
       <div className="btn-container">
         <FontAwesomeIcon
           icon={faCloud}
+          className={classesAir}
           size="2x"
           id="airbtn"
           onMouseOver={handleHoverairin}
           onMouseOut={handleHoverairout}
+          onClick={no2Handler}
         />
         {airpoluhover && (
           <div>

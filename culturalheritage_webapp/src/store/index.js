@@ -17,6 +17,8 @@ const initialState = {
   userInfo: false,
   userName: false,
   infoShow: false,
+  no2Show:false,
+  no2List:[],
   selectedMonument: {
     title: "-",
     y: "-",
@@ -61,6 +63,12 @@ const buttonsSlice = createSlice({
     },
     monumentselection(state, action) {
       state.selectedMonument = action.payload;
+    },
+    no2(state, action) {
+      state.no2Show = action.payload;
+    },
+    setno2List(state, action) {
+      state.no2List = action.payload;
     },
 
 

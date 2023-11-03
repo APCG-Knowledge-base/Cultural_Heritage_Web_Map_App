@@ -1,5 +1,55 @@
 import { getAuthToken } from '../util/auth';
 
+export const aq_devices = [
+  {
+    id:22643,
+    pollutant: ['so2','no2'],
+    x:30.37992,
+    y:50.45623,
+  },
+  {
+    id:19720,
+    pollutant: ['so2'],
+    x:30.44226,
+    y:50.47521,
+  },
+  {
+    id:3547,
+    pollutant: ['so2','no2'],
+    x:30.476052,
+    y:50.382998,
+  },
+  {
+    id:14633,
+    pollutant: ['so2','no2'],
+    x:30.630625,
+    y:50.439337,
+  },
+  {
+    id:19719,
+    pollutant: ['so2'],
+    x:30.43135,
+    y:50.50572,
+  },
+  {
+    id:17113,
+    pollutant: ['no2'],
+    x:30.631413,
+    y:50.413226,
+  },
+  {
+    id:17112,
+    pollutant: ['no2'],
+    x:30.513254,
+    y:50.472935,
+  },
+  // {
+  //   id:14634,
+  //   pollutant: ['no2'],
+  //   x:30.513254,
+  //   y:50.472935,
+  // },
+]
 
 export const ccpoints = [
   {
