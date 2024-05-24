@@ -46,6 +46,7 @@ const MapButtons = (props) => {
   const lndhover = useSelector((state) => state.lndhover);
   const grmhover = useSelector((state) => state.grmhover);
   const glctnhover = useSelector((state) => state.glctnhover);
+  const damagebuildhover = useSelector((state) => state.damagebuildhover);
   const ihover = useSelector((state) => state.ihover);
   const airpoluhover = useSelector((state) => state.airpoluhover);
   const addeventhover = useSelector((state) => state.addeventhover);
@@ -56,6 +57,7 @@ const MapButtons = (props) => {
   const [classesInf, setInf] = useState("infobtn");
   const [classesGrm, setGrm] = useState("grmbtn");
   const [classesAir, setAir] = useState("airbtn");
+  const [classesDamaged, setDamaged] = useState("dmgd");
   const [classesNav, setNav] = useState("navbtn");
   const [classesUsr, setUsr] = useState("usrbtn");
   const [classesPlus, setPlus] = useState("plusbtn");
@@ -237,6 +239,17 @@ const MapButtons = (props) => {
     }
   };
 
+  const damagedBuildingsHandler = () => {
+    setGrm("grmbtn");
+    setLand("lndbtn");
+    setAir("airbtn");
+    setDamaged("clicked");
+    dispatch(buttonsActions.land(false));
+    dispatch(buttonsActions.egms(false));
+    dispatch(buttonsActions.no2(false));
+    dispatch(buttonsActions.setno2List([]));
+  }
+
 
   const loginredirect1 = () => {
     console.log("this is the login status: ", isloggedin);
@@ -279,6 +292,12 @@ const MapButtons = (props) => {
   };
   const handleHoverairout = () => {
     dispatch(buttonsActions.airhover(false));
+  };
+  const handleHoverdamagedin = () => {
+    dispatch(buttonsActions.damagehover(true));
+  };
+  const handleHoverdamagedout = () => {
+    dispatch(buttonsActions.damagehover(false));
   };
   const handleHoverlandin = () => {
     dispatch(buttonsActions.landhover(true));
@@ -351,6 +370,24 @@ const MapButtons = (props) => {
           <div>
             <div className="rhombus"></div>
             <div className="hv">Air Quality Map</div>
+          </div>
+        )}
+      </div>
+
+      <div className="btn-container">
+        <FontAwesomeIcon
+          icon={faBiohazard}
+          className={classesDamaged}
+          size="2x"
+          id="dmgd"
+          onMouseOver={handleHoverdamagedin}
+          onMouseOut={handleHoverdamagedout}
+          onClick={damagedBuildingsHandler}
+        />
+        {damagebuildhover && (
+          <div>
+            <div className="rhombus"></div>
+            <div className="hv">Damaged Buildings</div>
           </div>
         )}
       </div>

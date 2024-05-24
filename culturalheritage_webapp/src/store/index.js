@@ -11,6 +11,7 @@ const initialState = {
   grmhover: false,
   glctnhover: false,
   ihover: false,
+  damagebuildhover:false,
   airpoluhover: false,
   loginhover: false,
   addeventhover: false,
@@ -72,6 +73,11 @@ const buttonsSlice = createSlice({
     },
 
 
+
+
+    damagehover(state, action) {
+      state.damagebuildhover = action.payload;
+    },
 
     culthover(state, action) {
       state.cchover = action.payload;
