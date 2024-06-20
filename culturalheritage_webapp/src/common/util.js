@@ -1,5 +1,6 @@
 import { getAuthToken } from '../util/auth';
 
+
 export const aq_devices = [
   {
     id:22643,
@@ -47,12 +48,13 @@ export const aq_devices = [
   //   id:14634,
   //   pollutant: ['no2'],
   //   x:30.513254,
-  //   y:50.472935,
+  //   y:50.472935,ac
   // },
 ]
 
 export const ccpoints = [
   {
+    id:3,
     x: 30.497076213346478,
     y: 50.4417542436553,
     colorfill: "#60696B",
@@ -66,9 +68,13 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "As a result of the impact and explosion of the drone, the facades, walls, roof and interiors of the ancient residential building of the merchant Yosif Lev, built at the beginning of the XXth century, were partially destroyed (not registered).",
+    event:[
+
+    ]
   },
 
   {
+    id: 1,
     x: 30.526840360069464,
     y: 50.4532798719164,
     colorfill: "#60696B",
@@ -81,8 +87,10 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "The explosive wave from the rocket fire damaged the windows of the valuable historical building - the National Center Ukrainian House, built in 1982 (not registered). The center houses a concert hall, as well as a part of the funds of the Kyiv History Museum.",
+    event:[]
   },
   {
+    id:2,
     x: 30.511122625418672,
     y: 50.44195004787548,
     colorfill: "#60696B",
@@ -95,6 +103,7 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "The rocket attack damaged the facades and windows of the monument of history and architecture of national importance - the building of Taras Shevchenko University of Kyiv, built in 1837 (security No 34). The university archaeological museum located in the building also suffered minor damage.",
+      event:[]
   },
 
   //Kiyv region
@@ -111,7 +120,8 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "As a result of the shelling and during the occupation of the village by the russians, the windows, facades and interiors of the Museum of Weaving, located in the building of the Village House of Culture, built in 1967, were damaged. According to the head of the Kyiv Regional Military Administration, part of the museum's exhibits were damaged or stolen by the russian occupiers.",
-  },
+    event:[]
+    },
   {
     x: 29.78249705443081,
     y: 50.60059100234543,
@@ -125,7 +135,8 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "According to the local administration of culture, as a result of shelling, the facades were damaged and the roof of the modern building of the village House of Culture was destroyed (there is no confirming photo).",
-  },
+    event:[]
+    },
   {
     x: 34.24267742722058,
     y: 50.41757623991971,
@@ -139,7 +150,8 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "As a result of artillery bombardment by the Russians in the village, the Church of the Ascension (1994-98) was partially destroyed (the roof was broken and the interior of the church was damaged)",
-  },
+    event:[]
+    },
 
   //Donetsk
   {
@@ -156,7 +168,8 @@ export const ccpoints = [
     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
     description:
       "As a result of shelling, the walls and roof of the old residential building of the late XIXth or early XXth centuries were almost completely destroyed (not registered).",
-  },
+    event:[]
+    },
 
   ///New Updated with photos and everything Kiev
   {
@@ -175,8 +188,65 @@ export const ccpoints = [
     link: "https://mkip.notion.site/Kharkiv-region-Kharkiv-district-Kharkiv-city-Valentynivska-street-2-01612d76aa4e4251b1c02ca5ed5a2888",
     description:
       "The shelling destroyed the part of the modern building of the educational building of the Kharkiv National Pedagogical University named after H.S. Skovorody (Skovorody University), which housed the university library and the museum of the history of the educational institution. The modern stained-glass windows and wall paintings decorating the lobby of the building were also destroyed, and the monument to H.S. Skovorody was damaged. The state of the university library collection and museum exhibits is currently unknown.",
-  },
+    event:[]
+    },
 ];
+
+// export const ccpointsKiev = [
+//   {
+//     id:1,
+//     x: 30.497076213346478,
+//     y: 50.4417542436553,
+//     colorfill: "#60696B",
+//     title:
+//       "Residential building (building of the beginning of the XXth century)",
+//     objecttag: ["Ancient buildings"],
+//     other_tags: [""],
+//     date: "October 17 2022",
+//     source: "Found on internet",
+//     imgurl: [],
+//     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
+//     description:
+//       "As a result of the impact and explosion of the drone, the facades, walls, roof and interiors of the ancient residential building of the merchant Yosif Lev, built at the beginning of the XXth century, were partially destroyed (not registered).",
+//     event:[
+
+//     ]
+//   },
+
+//   {
+//     id: 2,
+//     x: 30.52683234,
+//     y: 50.45310496,
+//     colorfill: "#60696B",
+//     title: "Ukrainian House (built in 1982)",
+//     objecttag: ["Ancient buildings"],
+//     other_tags: ["Museums"],
+//     date: "October 10 2022",
+//     source: "Found on internet",
+//     imgurl: [],
+//     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
+//     description:
+//       "The explosive wave from the rocket fire damaged the windows of the valuable historical building - the National Center Ukrainian House, built in 1982 (not registered). The center houses a concert hall, as well as a part of the funds of the Kyiv History Museum.",
+//     event:[]
+//   },
+//   {
+//     id:3,
+//     x: 30.511122625418672,
+//     y: 50.44195004787548,
+//     colorfill: "#60696B",
+//     title: "Taras Shevchenko University (1837 building)",
+//     objecttag: ["Sightseeing"],
+//     other_tags: ["Ancient buildings", " Museums"],
+//     date: "October 10 2022",
+//     source: "Found on internet",
+//     imgurl: [],
+//     link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
+//     description:
+//       "The rocket attack damaged the facades and windows of the monument of history and architecture of national importance - the building of Taras Shevchenko University of Kyiv, built in 1837 (security No 34). The university archaeological museum located in the building also suffered minor damage.",
+//       event:[]
+//   },
+
+// ]
 
 export const ccAthnes = [
   {
@@ -313,34 +383,109 @@ export const ccAthnes = [
   },
 ];
 
-export async function findEvents(point) {
-  const token = getAuthToken();
 
-  let url = "http://localhost:8080/events";
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
-    },
-  });
-  const data = await response.json();
-  const final_list = [point];
+// export async function findEvents(point) {
+//   const token = getAuthToken();
 
-  data.events.forEach((event) => {
-    console.log("this is the event", event);
-    if (event.monument_reference === point.title) {
-      final_list.push(event); // Push the event object directly
-    }
-  });
+//   let url = "http://localhost:8080/events";
+//   const response = await fetch(url, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       // Authorization: "Bearer " + token,
+//     },
+//   });
+//   const data = await response.json();
+//   const final_list = [point];
 
-  console.log(final_list)
-  return final_list
+//   data.events.forEach((event) => {
+//     console.log("this is the event", event);
+//     if (event.monument_reference === point.title) {
+//       final_list.push(event); // Push the event object directly
+//     }
+//   });
+
+//   console.log(final_list)
+//   return final_list
 
 
-}
+// }
 
 // Monument:
 // Ancient
 // newer
 //
+// frontend.js
+
+
+// Helper function to calculate the distance between two geographical points
+export function haversine(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the Earth in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c; // Distance in km
+  return distance;
+}
+
+
+export const InitialccpointsKiev = [
+  {
+    id:1,
+    t_array_id:null,
+    x: 30.497076213346478,
+    y: 50.4417542436553,
+    title:
+      "Residential building (building of the beginning of the XXth century)",
+    subtitle:"check this is a subtitle check",
+    objecttag: ["Ancient buildings"],
+    other_tags: [""],
+    imgurl: [],
+    link: "https://www.arxaiologikoktimatologio.gov.gr/el/monuments_info?id=164525&type=Monument",
+    description:
+      "As a result of the impact and explosion of the drone, the facades, walls, roof and interiors of the ancient residential building of the merchant Yosif Lev, built at the beginning of the XXth century, were partially destroyed (not registered).",
+    event:[
+
+    ]
+  },
+
+  {
+    id: 2,
+    t_array_id:null,
+    x: 30.52683234,
+    y: 50.45310496,
+    title: "Ukrainian House (built in 1982)",
+    subtitle:"Khreschatyk St, 2, Kyiv, Ukraine, 01001",
+    objecttag: ["Ancient buildings"],
+    other_tags: ["Museums"],
+    imgurl: ['https://lh3.googleusercontent.com/p/AF1QipPQnEX8h56h7EpzzyMV0Godow4TN6fFmo1bMj6X=s1360-w1360-h1020-rw'],
+    link: "https://www.uadim.in.ua/",
+    description:
+      "The Ukrainian House International Convention Center, is the largest  international exhibition and convention center in Kyiv, Ukraine. The five-storey building is the host venue for a variety of events from exhibitions, trade fairs and conferences to international association meetings, product launches, banquets, TV-ceremonies, sporting events, etc.",
+    event:[]
+  },
+  {
+    id:3,
+    t_array_id:null,
+    x: 30.511122625418672,
+    y: 50.44195004787548,
+    title: "Taras Shevchenko University (1837 building)",
+    subtitle:"check this is a subtitle check",
+    objecttag: ["Sightseeing"],
+    other_tags: ["Ancient buildings", " Museums"],
+    imgurl: [],
+    link: "",
+    description:
+      "The rocket attack damaged the facades and windows of the monument of history and architecture of national importance - the building of Taras Shevchenko University of Kyiv, built in 1837 (security No 34). The university archaeological museum located in the building also suffered minor damage.",
+    event:[
+    ]
+  },
+
+]
+
+
+

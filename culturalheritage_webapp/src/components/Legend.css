@@ -1,0 +1,37 @@
+.listlegend{
+    padding:5px;
+    padding-left: -10px;
+    list-style-type: none;
+  }
+  
+  .legend{
+    background-color:white;
+    text-align:left;
+    margin:8px;
+  }
+  
+  
+  
+  .yo{
+    padding-right:5px;
+  }
+  
+  .changemelater{
+    padding-left: 40px;
+  }
+
+  .legend-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .red {
+    background-color: red;
+  }
+  
+  .orange {
+    background-color: orange;
+  }

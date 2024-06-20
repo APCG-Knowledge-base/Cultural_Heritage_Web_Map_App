@@ -1,5 +1,5 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
-
+import { InitialccpointsKiev } from "../common/util.js";
 const initialState = {
   userLocation: null,
   showEGMS: false,
@@ -7,6 +7,7 @@ const initialState = {
   isloggedin: false,
   cchover: false,
   showCCinfo: false,
+  showObjinfo:false,
   lndhover: false,
   grmhover: false,
   glctnhover: false,
@@ -18,6 +19,8 @@ const initialState = {
   userInfo: false,
   userName: false,
   infoShow: false,
+  objectsShow:false,
+  transformedData:[],
   no2Show:false,
   no2List:[],
   selectedMonument: {
@@ -31,7 +34,10 @@ const initialState = {
     description: "-",
     link: "-",
     colorfill: "-",
+    event:[],
   },
+  ccpointsKiev : InitialccpointsKiev,
+
 };
 
 const buttonsSlice = createSlice({
@@ -62,8 +68,17 @@ const buttonsSlice = createSlice({
     isccinfoopen(state, action) {
       state.showCCinfo = action.payload;
     },
+    isobjinfoopen(state, action) {
+      state.showObjinfo = action.payload;
+    },
     monumentselection(state, action) {
       state.selectedMonument = action.payload;
+    },
+    objectSelection(state, action) {
+      state.selectedObject = action.payload;
+    },
+    objregister(state, action) {
+      state.objectsShow = action.payload;
     },
     no2(state, action) {
       state.no2Show = action.payload;
@@ -71,8 +86,12 @@ const buttonsSlice = createSlice({
     setno2List(state, action) {
       state.no2List = action.payload;
     },
-
-
+    setTransformeddata(state, action) {
+      state.transformedData = action.payload;
+    },
+    setKievccpoints(state, action) {
+      state.ccpointsKiev = action.payload;
+    },
 
 
     damagehover(state, action) {

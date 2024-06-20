@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import classes from "./EventForm.module.css";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 
 function EventForm({ event }) {
@@ -19,6 +20,8 @@ function EventForm({ event }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [selectedTitle, setSelectedTitle] = useState(event ? event.title : ""); // Initialize with event title
+  const ccpointsKiev = useSelector((state) => state.ccpointsKiev);
+
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -60,7 +63,7 @@ function EventForm({ event }) {
             onChange={titleHandler}
           >
             <option value="" disabled>Select a monument</option>
-            {ccpoints.map((item) => (
+            {ccpointsKiev.map((item) => (
               <option key={item.title} value={item.title}>
                 {item.title}
               </option>
@@ -68,16 +71,16 @@ function EventForm({ event }) {
           </select>
         </p>
 
-        <p>
-          <label htmlFor="title">Title</label>
+        {/* <p>
+          <label htmlFor="infotxt">Description</label>
           <input
-            id="title"
+            id="infotxt"
             type="text"
-            name="title"
+            name="infotxt"
             required
             defaultValue={event ? event.title : ""}
           />
-        </p>
+        </p> */}
         <p>
           <label htmlFor="image">Image</label>
           <input
@@ -96,6 +99,16 @@ function EventForm({ event }) {
             name="date"
             required
             defaultValue={event ? event.date : ""}
+          />
+        </p>
+        <p>
+          <label htmlFor="title">Source</label>
+          <input
+            id="title"
+            type="text"
+            name="title"
+            required
+            defaultValue={event ? event.title : ""}
           />
         </p>
         <p>

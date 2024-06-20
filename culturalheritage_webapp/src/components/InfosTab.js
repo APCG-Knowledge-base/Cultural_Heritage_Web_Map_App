@@ -49,9 +49,6 @@ function InfosTab() {
         To produce an app that caters to real needs, the user interface is designed through a co-design method with stakeholders and end users together.
       </p>
       <p>
-        Technically, our app development revolves around ReactJS, harnessing its flexibility to create a seamless and feature-rich user experience. Next.js, Redux, and React Routing further enhance performance, enabling real-time updates and smooth navigation.
-      </p>
-      <p>
         Our DEMO: <a href="https://www.youtube.com/watch?v=hNAHcL0Wi1k" target="_blank" rel="noopener noreferrer">Watch Demo</a>
       </p>
     </div>

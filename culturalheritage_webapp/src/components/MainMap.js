@@ -15,16 +15,21 @@ import MapButtons from "./MapButtons";
 import { ZoomControl } from "react-leaflet";
 import CCMarker from "./CCMarker.js";
 import AirMarker from "./AirMarker.js";
-import { ccAthnes } from "../common/util.js";
-import { ccpoints } from "../common/util.js";
-import { aq_devices } from "../common/util.js";
+// import { ccAthnes } from "../common/util.js";
+// import { ccpoints } from "../common/util.js";
+// import { ccpointsKiev } from "../common/util.js";
+// import { aq_devices } from "../common/util.js";
+// import { objects_registered } from "../common/util.js"; // Import the function here
 import GeoLayerPoints from "./GeoLayerPoints.js";
 import GeoLayerPolygons from "./GeoLayerPolygons.js";
 import geojsonPoints from "../geoData/athensegms.geojson";
 import geojsonPolygons from "../geoData/athenslandusecorine.geojson";
 import ButtonDetailed from "./ButtonDetailed.js";
 import CCinfo from "./CCinfo.js";
+import ObjectsMarker from "./ObjectsMarker.js";
 import InfosTab from "./InfosTab.js";
+import Legend from "./Legend.js";
+
 
 const arrowIcon = new L.Icon({
   iconUrl: arrow,
@@ -44,7 +49,11 @@ const MainMap = () => {
   const showCCinfo = useSelector((state) => state.showCCinfo);
   const infoShow = useSelector((state) => state.infoShow);
   const no2Show = useSelector((state) => state.no2Show);
+  const objectsShow = useSelector((state) => state.objectsShow);
   const no2List = useSelector((state) => state.no2List);
+  const transformedData = useSelector((state) => state.transformedData);
+  const ccpointsKiev = useSelector((state) => state.ccpointsKiev);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [mapCenter, setMapCenter] = useState([50.383234, 30.411789]);
   const [zoomLevel, setZoomLevel] = useState(7);
@@ -59,9 +68,11 @@ const MainMap = () => {
     }
   }, [userLocation]);
 
-  // useEffect(() => {
-  //   console.log(no2List);
-  // }, [no2List]);
+  useEffect(() => {
+    if (transformedData.length > 0) {
+      setIsLoading(false);
+    }
+  }, [transformedData]);
 
   // Custom hook to access the map instance
   function ChangeMapView({ center, zoom }) {
@@ -91,11 +102,6 @@ const MainMap = () => {
     dispatch(buttonsActions.isccinfoopen(false));
   };
 
-  // const makeairMarker = (airobjectsList) => {
-
-  //     circleMarker.addTo(mapRef.current);
-  //   });
-  // }
 
   const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
   const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
@@ -139,6 +145,11 @@ const MainMap = () => {
           <ZoomControl position="topright" />{" "}
         </div>
 
+        <div className="leaflet-bottom leaflet-left">
+          {" "}
+          <Legend position="bottomleft" />{" "}
+        </div>
+
         {infoShow && (
           <div className="details_container">
             <button onClick={closeInfo} className="btn-x">
@@ -157,7 +168,6 @@ const MainMap = () => {
           </div>
         )}
 
-
         <div className="btn_container">
           <MapButtons />
         </div>
@@ -166,6 +176,40 @@ const MainMap = () => {
 
         {memoizedGeoLayerPolygons}
 
+        {objectsShow && (
+          <div className="markers_div">
+            {isLoading ? (
+              <div className="backdrop">
+                <div className="spinner"></div>{" "}
+                {/* Your spinner or loading indicator */}
+              </div>
+            ) : (
+              <>
+                {transformedData.map((point, index) => (
+                  <CircleMarker
+                    key={index}
+                    center={[point.y, point.x]}
+                    radius={12}
+                    color={point.color}
+                    fillColor={point.color}
+                    fillOpacity={1} 
+                    stroke={true}
+                    weight={2}
+                  >
+                    {/* <ObjectsMarker key={index} object={point} /> */}
+                  </CircleMarker>
+                ))}
+                {showCCinfo && (
+                  <div className="cc_info_container">
+                    <div onClick={closeCCinfo} className="trapezium"></div>
+                    <div className="arrow-left" onClick={closeCCinfo}></div>
+                    <CCinfo />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
 
         {no2Show && (
           <div className="markers_div">
@@ -181,7 +225,6 @@ const MainMap = () => {
                 weight={2}
               >
                 <AirMarker key={index} no2point={point} />
-
               </CircleMarker>
             ))}
             {showCCinfo && (
@@ -194,9 +237,8 @@ const MainMap = () => {
           </div>
         )}
 
-
         <div className="markers_div">
-          {ccpoints.map((point, index) => (
+          {ccpointsKiev.map((point, index) => (
             <CircleMarker
               key={index}
               center={[point.y, point.x]}

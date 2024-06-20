@@ -31,6 +31,10 @@ import { json, redirect } from "react-router";
 import { useNavigate } from "react-router-dom";
 import ButtonDetailed from "./ButtonDetailed.js";
 import { aq_devices } from "../common/util.js";
+import { ccpoints } from "../common/util.js";
+import {haversine} from "../common/util.js";
+import axios from 'axios';
+import { InitialccpointsKiev } from "../common/util.js";
 
 
 const MapButtons = (props) => {
@@ -41,6 +45,7 @@ const MapButtons = (props) => {
   const userInfo = useSelector((state) => state.userInfo);
   const infoShow = useSelector((state) => state.infoShow);
   const no2Show = useSelector((state) => state.no2Show);
+  const objectsShow = useSelector((state) => state.objectsShow);
   const userName = useSelector((state) => state.userName);
   const cchover = useSelector((state) => state.cchover);
   const lndhover = useSelector((state) => state.lndhover);
@@ -51,6 +56,8 @@ const MapButtons = (props) => {
   const airpoluhover = useSelector((state) => state.airpoluhover);
   const addeventhover = useSelector((state) => state.addeventhover);
   const loginhover = useSelector((state) => state.loginhover);
+  const transformedData  = useSelector((state) => state.transformedData );
+  const ccpointsKiev  = useSelector((state) => state.ccpointsKiev );
   const dispatch = useDispatch();
   const [classesCC, setCC] = useState("ccbtn");
   const [classesLand, setLand] = useState("lndbtn");
@@ -64,6 +71,7 @@ const MapButtons = (props) => {
   const [classesProfile, setProfile] = useState("profilee");
   const [classesInfo, setInfoclass] = useState("infobtn");
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     let t = localStorage.getItem("token");
@@ -152,6 +160,7 @@ const MapButtons = (props) => {
     dispatch(buttonsActions.no2(!no2Show));
     setGrm("grmbtn");
     setLand("lndbtn");
+    // setDamaged("dmgd");
     dispatch(buttonsActions.land(false));
     dispatch(buttonsActions.egms(false));
     if (!no2Show) {
@@ -239,17 +248,150 @@ const MapButtons = (props) => {
     }
   };
 
+
+  function correlateData(ccpointsKiev, t, radius = 0.02) { // radius in km
+    return ccpointsKiev.map(ccpoint => {
+      const updatedCcpoint = { ...ccpoint };
+      let correlated = false;
+      t.forEach(tpoint => {
+        console.log("check")
+        const distance = haversine(updatedCcpoint.y, updatedCcpoint.x, parseFloat(tpoint.y), parseFloat(tpoint.x));
+        if (distance <= radius) {
+          console.log(ccpoint.id)
+          console.log(tpoint.id)
+          console.log("yes")
+          correlated = true;
+          updatedCcpoint.t_array_id = tpoint.id; // Add t_array_id to ccpoint
+        }
+      });
+      if (!correlated) {
+        updatedCcpoint.t_array_id = null; // No correlation found
+      }
+      return updatedCcpoint;
+    });
+  }
+
+
+  const objects_registered = async () => {
+    const url = `http://localhost:5000/api/get-building-data`;
+    try {
+      const res = await fetch(url);
+      const text = await res.text(); // Get the response as text
+      // console.log("Response text:", text); // Log the response text
+      
+      // Replace single quotes with double quotes
+      const modifiedText = text.replace(/'/g, '"');
+      const modifiedText2 = modifiedText.replace(/None/g, 'null');
+      const modifiedText3 = modifiedText2.replace(/True/g, 'true');
+      const modifiedText4 = modifiedText3.replace(/False/g, 'false');
+      
+      // Attempt to parse the modified response text as JSON
+      const data = JSON.parse(modifiedText4);
+      console.log("i fetched all the data from the object registered")
+      console.log(data);
+      // Check if data is valid and contains the results array
+      if (data && Array.isArray(data.results)) {
+        // Function to determine the color based on the restored value
+        const getColor = (restored) => {
+          return restored ? 'orange' : 'red';
+        };
+
+        // Transform the data
+        const t = data.results.map(item => ({
+          id: item.id,
+          x: item.longitude,
+          y: item.latitude,
+          color: getColor(item.restored),
+          device_content: `
+            <div class="popup popup-aqi popup-pollutant-no2_ppb">
+              <a href="#${item.id}">Station Details</a>
+            </div>
+          `,
+          ...item // Include other properties if necessary
+        }));
+
+        const updatedCcpoints = correlateData(ccpointsKiev, t);
+        console.log(updatedCcpoints)
+        // Set the transformed data in state
+        dispatch(buttonsActions.setKievccpoints(updatedCcpoints));
+        dispatch(buttonsActions.setTransformeddata(t));
+      } else {
+        console.error("Invalid data format", data);
+      }
+      return data; // Returning the data for further processing if needed
+    } catch (err) {
+      console.log("Here is an error", err);
+      return null;
+    }
+  }
+
+
   const damagedBuildingsHandler = () => {
     setGrm("grmbtn");
     setLand("lndbtn");
     setAir("airbtn");
-    setDamaged("clicked");
     dispatch(buttonsActions.land(false));
     dispatch(buttonsActions.egms(false));
     dispatch(buttonsActions.no2(false));
     dispatch(buttonsActions.setno2List([]));
+    dispatch(buttonsActions.objregister(!objectsShow));
+    if (!objectsShow) {
+      dispatch(buttonsActions.isccinfoopen(false));
+      setDamaged("clicked");
+      objects_registered();
+      // damagedbuildingbyid();
+    }else {
+      dispatch(buttonsActions.isccinfoopen(false));
+      dispatch(buttonsActions.setKievccpoints(InitialccpointsKiev));
+      setDamaged("dmgd");
+
+      // dispatch(buttonsActions.setno2List([]));
+    }
   }
 
+
+  // async function findEvents(ccpointslist) {
+  //   function addEventToPoint(existingPoint, newEvent) {
+  //     return {
+  //       ...existingPoint,
+  //       event: [...existingPoint.event, newEvent],
+  //     };
+  //   }
+
+  //   const token = getAuthToken();
+  //   let url = "http://localhost:8080/events";
+  //   const response = await fetch(url, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // Authorization: "Bearer " + token,
+  //     },
+  //   });
+  //   const data = await response.json();
+  //   // console.log(data);
+  //   const events = data.events;
+  //   const updatedList = [];
+
+  //   ccpointslist.forEach((itemA) => {
+  //     const matchingItemB = events.find(
+  //       (itemB) => itemA.title === itemB.monument_reference
+  //     );
+  //     if (matchingItemB) {
+  //       // Create a new object with properties from both A and B
+  //       const updatedObject = addEventToPoint(itemA, matchingItemB) 
+  //       // console.log(updatedObject);
+  //       updatedList.push(updatedObject);
+  //     } else {
+  //       // console.log(itemA);
+  //       // If there's no match in listB, add the original object from listA
+  //       updatedList.push(itemA);
+  //     }
+  //   });
+  //   console.log(updatedList)
+  //   setUpdatedCcpoints(updatedList)
+  // }
+
+  
 
   const loginredirect1 = () => {
     console.log("this is the login status: ", isloggedin);
