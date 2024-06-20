@@ -26,6 +26,7 @@ async function get(id) {
 }
 
 async function add(data) {
+  console.log("hey")
   const storedData = await readData();
   console.log(storedData)
   storedData.events.unshift({ ...data, id: generateId() });

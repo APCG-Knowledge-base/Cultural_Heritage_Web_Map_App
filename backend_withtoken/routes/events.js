@@ -34,23 +34,30 @@ router.use(checkAuth);
 router.post('/', async (req, res, next) => {
   console.log(req.token);
   const data = req.body;
-
+  console.log("i am here", data)
   let errors = {};
 
   if (!isValidText(data.title)) {
     errors.title = 'Invalid title.';
+    console.log(errors.title)
   }
 
   if (!isValidText(data.description)) {
     errors.description = 'Invalid description.';
+    console.log(errors.description)
+
   }
 
   if (!isValidDate(data.date)) {
     errors.date = 'Invalid date.';
+    console.log(errors.date )
+
   }
 
   if (!isValidImageUrl(data.image)) {
     errors.image = 'Invalid image.';
+    console.log(errors.image)
+
   }
 
   if (Object.keys(errors).length > 0) {
@@ -60,7 +67,7 @@ router.post('/', async (req, res, next) => {
     });
   }
 
-  // console.log(data)
+
 
   try {
     await add(data);

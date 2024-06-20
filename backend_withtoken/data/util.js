@@ -6,6 +6,8 @@ async function readData() {
 }
 
 async function writeData(data) {
+  console.log('yobani')
+  console.log(data)
   await fs.writeFile('events.json', JSON.stringify(data));
 }
 
