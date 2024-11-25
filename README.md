@@ -15,7 +15,8 @@ The application is designed to be:
 
 
 <div align="center">
-  <img src="landing_page.png" alt="Landing Page" style="width: 100%; max-width: 800px; height: auto;">
+  
+  ![Landing Page](landing_page.png)
 </div>
 ---
 
