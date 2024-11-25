@@ -19,9 +19,9 @@ def get_building_data(latitude, longitude, radius, page, building_type, region):
         return json.loads(data)
 
 # Example usage:
-latitude = 50.45203917359973
-longitude = 30.49937557363528
-radius = 6
+latitude = 50.45110270786878
+longitude = 30.51368519768905
+radius = 4
 page = 1
 building_type = 32
 region = 7

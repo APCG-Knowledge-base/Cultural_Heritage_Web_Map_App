@@ -63,6 +63,30 @@ app.get('/api/get-id-data', (req, res) => {
 });
 
 
+// Add proxy endpoint for fetching data from saveecobot.com
+app.get('/api/get-air-data', async (req, res) => {
+    const { device_id, formattedDate } = req.query;
+
+    if (!device_id || !formattedDate) {
+        return res.status(400).send('device_id and formattedDate query parameters are required');
+    }
+
+    const base_url = `https://www.saveecobot.com/en/maps/marker.json?marker_id=${device_id}&marker_type=device&pollutant=no2_ppb&rand=${formattedDate}`;
+    console.log(base_url)
+    try {
+        const response = await fetch(base_url);
+        if (!response.ok) {
+            console.error(`Fetch error: ${response.status} ${response.statusText}`);
+            res.status(response.status).send(`Error fetching data: ${response.statusText}`);
+            return;
+        }
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Error fetching data');
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

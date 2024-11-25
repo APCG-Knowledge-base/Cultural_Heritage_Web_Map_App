@@ -3,6 +3,7 @@ const express = require('express');
 
 const eventRoutes = require('./routes/events');
 const authRoutes = require('./routes/auth');
+const adminEventRoutes = require('./routes/admin'); // Correct import for admin routes
 
 const app = express();
 
@@ -15,8 +16,8 @@ app.use((req, res, next) => {
 });
 
 app.use(authRoutes);
-
 app.use('/events', eventRoutes);
+app.use('/admin', adminEventRoutes); // Use admin routes correctly
 
 app.use((error, req, res, next) => {
   const status = error.status || 500;
