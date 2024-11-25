@@ -13,11 +13,9 @@ The application is designed to be:
 - **Expandable**: Easily applied to other conflict areas.
 - **Decision-Oriented**: A tool for authorities responsible for cultural heritage conservation and monitoring.
 
-
-<div align="center">
   
-  ![Landing Page](landing_page.png)
-</div>
+![Landing Page](landing_page.png)
+
 ---
 
 ## **System Requirements**
