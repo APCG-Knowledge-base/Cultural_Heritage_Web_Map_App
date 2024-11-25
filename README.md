@@ -14,7 +14,9 @@ The application is designed to be:
 - **Decision-Oriented**: A tool for authorities responsible for cultural heritage conservation and monitoring.
 
 
-![Landing Page](landing_page.png)
+<div align="center">
+  <img src="landing_page.png" alt="Landing Page" style="width: 100%; max-width: 800px; height: auto;">
+</div>
 ---
 
 ## **System Requirements**
