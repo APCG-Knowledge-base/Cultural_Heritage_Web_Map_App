@@ -27,7 +27,11 @@ const TagWithIcons = ({ tags }) => (
     {tags.map((tag, index) => (
       <h3 key={index} className="tag">
         {tag}
-        <FontAwesomeIcon icon={tagIconMapping[tag]} size="1x" className="iconcc" />
+        <FontAwesomeIcon
+          icon={tagIconMapping[tag]}
+          size="1x"
+          className="iconcc"
+        />
       </h3>
     ))}
   </div>
@@ -47,7 +51,9 @@ const ImageGallery = ({ imgurl, handleImageClick }) => (
           />
         ))
       ) : (
-        <span style={{ fontWeight: "normal", paddingLeft: "19px" }}>No photos available</span>
+        <span style={{ fontWeight: "normal", paddingLeft: "19px" }}>
+          No photos available
+        </span>
       )}
     </div>
   </div>
@@ -65,8 +71,12 @@ const EventDetails = ({ event, handleImageClick }) => (
         />
       </div>
     )}
-    <p><strong>Event Date:</strong> {event.happend}</p>
-    <p><strong>Source:</strong> {event.source}</p>
+    <p>
+      <strong>Event Date:</strong> {event.happend}
+    </p>
+    <p>
+      <strong>Source:</strong> {event.source}
+    </p>
   </div>
 );
 
@@ -79,11 +89,11 @@ const EventTabs = ({ events, activeEventIndex, setActiveEventIndex }) => (
       return (
         <span
           key={index}
-          className={`event-tab ${isActive ? 'active' : ''}`}
+          className={`event-tab ${isActive ? "active" : ""}`}
           onClick={() => setActiveEventIndex(index)}
           style={{
             borderBottom: isActive ? `2px solid ${color}` : "none",
-            color: isActive ? color : "black"
+            color: isActive ? color : "black",
           }}
         >
           {`Event ${index + 1}`}
@@ -115,10 +125,24 @@ function CCinfo(props) {
   const events = hasEvent ? selectedMonument.event : null;
   const activeEvent = hasEvent ? events[activeEventIndex] : null;
 
+
+
   return (
     <div className="titlecc">
       <h1 className="titleinfocc">{selectedMonument.title}</h1>
-      {selectedMonument.subtitle && <h2>{selectedMonument.subtitle}</h2>}
+      {selectedMonument.subtitle && (
+        <h2>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              selectedMonument.subtitle
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {selectedMonument.subtitle}
+          </a>
+        </h2>
+      )}
       <TagWithIcons tags={tags} />
 
       {hasEvent ? (
@@ -128,27 +152,48 @@ function CCinfo(props) {
             activeEventIndex={activeEventIndex}
             setActiveEventIndex={setActiveEventIndex}
           />
-          <EventDetails event={activeEvent} handleImageClick={handleImageClick} />
+          <EventDetails
+            event={activeEvent}
+            handleImageClick={handleImageClick}
+          />
           {enlargedImage && (
             <div>
               <div className="backdrop" onClick={closeEnlargedImage}></div>
-              <img src={enlargedImage} alt="Enlarged Photo" className="enlarged-image" />
+              <img
+                src={enlargedImage}
+                alt="Enlarged Photo"
+                className="enlarged-image"
+              />
             </div>
           )}
         </>
       ) : (
         <>
           <p>{selectedMonument.description}</p>
-          <ImageGallery imgurl={selectedMonument.imgurl} handleImageClick={handleImageClick} />
+          <ImageGallery
+            imgurl={selectedMonument.imgurl}
+            handleImageClick={handleImageClick}
+          />
           {enlargedImage && (
             <div>
               <div className="backdrop" onClick={closeEnlargedImage}></div>
-              <img src={enlargedImage} alt="Enlarged Photo" className="enlarged-image" />
+              <img
+                src={enlargedImage}
+                alt="Enlarged Photo"
+                className="enlarged-image"
+              />
             </div>
           )}
           <div className="othercc">
             <div className="moreinfocc" style={{ fontWeight: "bold" }}>
-              More Information: <a href={selectedMonument.link} target="_blank" rel="noopener noreferrer">{selectedMonument.link}</a>
+              More Information:{" "}
+              <a
+                href={selectedMonument.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {selectedMonument.link}
+              </a>
             </div>
           </div>
         </>

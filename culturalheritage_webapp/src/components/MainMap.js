@@ -2,9 +2,10 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
-  useMap,
   Marker,
   CircleMarker,
+  ZoomControl,
+  useMap, // Import useMap from react-leaflet
 } from "react-leaflet";
 import L from "leaflet";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,24 +13,16 @@ import { buttonsActions } from "../store/index.js";
 import "./MainMap.css";
 import arrow from "../ccccc.png";
 import MapButtons from "./MapButtons";
-import { ZoomControl } from "react-leaflet";
 import CCMarker from "./CCMarker.js";
 import AirMarker from "./AirMarker.js";
-// import { ccAthnes } from "../common/util.js";
-// import { ccpoints } from "../common/util.js";
-// import { ccpointsKiev } from "../common/util.js";
-// import { aq_devices } from "../common/util.js";
-// import { objects_registered } from "../common/util.js"; // Import the function here
 import GeoLayerPoints from "./GeoLayerPoints.js";
 import GeoLayerPolygons from "./GeoLayerPolygons.js";
 import geojsonPoints from "../geoData/athensegms.geojson";
 import geojsonPolygons from "../geoData/athenslandusecorine.geojson";
 import ButtonDetailed from "./ButtonDetailed.js";
 import CCinfo from "./CCinfo.js";
-import ObjectsMarker from "./ObjectsMarker.js";
 import InfosTab from "./InfosTab.js";
 import Legend from "./Legend.js";
-
 
 const arrowIcon = new L.Icon({
   iconUrl: arrow,
@@ -47,17 +40,17 @@ const MainMap = () => {
   const showLandcover = useSelector((state) => state.showLandcover);
   const userInfo = useSelector((state) => state.userInfo);
   const showCCinfo = useSelector((state) => state.showCCinfo);
+  const isloadinforgcc = useSelector((state) => state.isloadinforgcc);
   const infoShow = useSelector((state) => state.infoShow);
   const no2Show = useSelector((state) => state.no2Show);
   const objectsShow = useSelector((state) => state.objectsShow);
   const no2List = useSelector((state) => state.no2List);
   const transformedData = useSelector((state) => state.transformedData);
   const ccpointsKiev = useSelector((state) => state.ccpointsKiev);
+  const [clusteredCCpoints, setClusteredCCpoints] = useState([]); // Define clusteredCCpoints state
   const [isLoading, setIsLoading] = useState(true);
-
   const [mapCenter, setMapCenter] = useState([50.383234, 30.411789]);
   const [zoomLevel, setZoomLevel] = useState(7);
-  // const [no2List, setNo2] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,7 +59,7 @@ const MainMap = () => {
       setZoomLevel(17); // Update the zoom level here
       dispatch(buttonsActions.geolocation(null));
     }
-  }, [userLocation]);
+  }, [userLocation, dispatch]);
 
   useEffect(() => {
     if (transformedData.length > 0) {
@@ -74,12 +67,12 @@ const MainMap = () => {
     }
   }, [transformedData]);
 
-  // Custom hook to access the map instance
+  // Custom hook to change map view
   function ChangeMapView({ center, zoom }) {
-    console.log("changeMapView is called");
-    console.log(userLocation);
-    const map = useMap();
-    map.setView(center, zoom);
+    const map = useMap(); // Use useMap hook to access the map instance
+    useEffect(() => {
+      map.setView(center, zoom);
+    }, [center, zoom, map]);
     return (
       <>
         {userLocation && (
@@ -92,21 +85,39 @@ const MainMap = () => {
     );
   }
 
+  // Handle zoom end to update zoom level state
+  useEffect(() => {
+    const map = mapRef.current;
+    if (map) {
+      
+      map.on("zoomend", () => { 
+        const zoom = map.getZoom();
+        setZoomLevel(zoom);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    // console.log("Zoom level changed:", zoomLevel);
+    const cc = clusterPoints(ccpointsKiev, zoomLevel);
+    setClusteredCCpoints(cc);
+  }, [zoomLevel, ccpointsKiev]);
+
   const closeDetails = () => {
     dispatch(buttonsActions.userinfoopen(false));
   };
+
   const closeInfo = () => {
     dispatch(buttonsActions.isinfoopen(false));
   };
+
   const closeCCinfo = () => {
     dispatch(buttonsActions.isccinfoopen(false));
   };
 
-
   const MemoizedGeoLayerPoints = React.memo(GeoLayerPoints);
   const MemoizedGeoLayerPolygons = React.memo(GeoLayerPolygons);
 
-  // Use useMemo to memoize the rendering of MemoizedGeoLayerPolygons/Points
   const memoizedGeoLayerPolygons = useMemo(() => {
     if (showLandcover) {
       return <MemoizedGeoLayerPolygons urltofetch={urltofetchPolygons} />;
@@ -120,6 +131,72 @@ const MainMap = () => {
     }
     return null;
   }, [showEGMS, urltofetchPoints]);
+
+  const clusterPoints = (points, zoom) => {
+    const clusters = [];
+    const clusterRadius = 0.0025 * Math.pow(2, 13 - zoom);
+    //console.log("Clustering points with zoom level:", zoom);
+    //console.log("and radius:", clusterRadius);
+    points.forEach((point, index) => {
+      let added = false;
+      for (const cluster of clusters) {
+        const dist = Math.sqrt(
+          Math.pow(point.x - cluster.center.x, 2) +
+            Math.pow(point.y - cluster.center.y, 2)
+        );
+
+        if (dist < clusterRadius) {
+          cluster.points.push(point);
+          cluster.center.x =
+            (cluster.center.x * (cluster.points.length - 1) + point.x) /
+            cluster.points.length;
+          cluster.center.y =
+            (cluster.center.y * (cluster.points.length - 1) + point.y) /
+            cluster.points.length;
+          added = true;
+          break;
+        }
+      }
+      if (!added) {
+        const newCluster = {
+          center: { x: point.x, y: point.y },
+          points: [point],
+        };
+        clusters.push(newCluster);
+      }
+    });
+
+    //console.log("Final clusters:", clusters);
+    return clusters;
+  };
+
+  const handleClusterClick = (center) => {
+    if (mapRef.current) {
+      mapRef.current.setView([center.y, center.x], 17);
+    }
+    // console.log("e")
+    // const map = mapRef.current;
+    // if (map) {
+    //   map.on("zoomend", () => {
+    //     const zoom = map.getZoom();
+    //     setZoomLevel(zoom);
+    //   });
+    // }
+  };
+
+  const createCustomClusterMarker = (cluster, index) => {
+    const clusterSize = cluster.points.length;
+    const iconSize = Math.min(40 + clusterSize / 2, 100); // Adjust size based on the number of points
+    const html = `
+      <div class="custom-cluster-marker" style="width: ${iconSize}px; height: ${iconSize}px;">
+        ${clusterSize}
+      </div>
+    `;
+    return L.divIcon({
+      html,
+      className: "",
+    });
+  };
 
   return (
     <div id="parent_of_all_div">
@@ -135,19 +212,17 @@ const MainMap = () => {
           url={
             "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
           }
-          attributionPosition="bottomtop" // Set the attribution position here
+          attributionPosition="bottomtop"
         />
 
         {userLocation && <ChangeMapView center={mapCenter} zoom={zoomLevel} />}
 
         <div className="leaflet-top leaflet-right">
-          {" "}
-          <ZoomControl position="topright" />{" "}
+          <ZoomControl position="topleft" />
         </div>
 
         <div className="leaflet-bottom leaflet-left">
-          {" "}
-          <Legend position="bottomleft" />{" "}
+          <Legend position="bottomleft" />
         </div>
 
         {infoShow && (
@@ -176,12 +251,55 @@ const MainMap = () => {
 
         {memoizedGeoLayerPolygons}
 
+        {/* CC of kiev (not the markers and the events) when the events are shown! */}
         {objectsShow && (
           <div className="markers_div">
-            {isLoading ? (
-              <div className="backdrop">
-                <div className="spinner"></div>{" "}
-                {/* Your spinner or loading indicator */}
+            {isloadinforgcc ? (
+              <div class="backdrop">
+                <div class="spinner">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+            ) : (
+              <>
+                {ccpointsKiev.map((point, index) => (
+                  <CircleMarker
+                    key={index}
+                    center={[point.y, point.x]}
+                    radius={12}
+                    color={"#333333"}
+                    fillColor={"#333333"}
+                    fillOpacity={1}
+                    stroke={true}
+                    weight={2}
+                  >
+                    <CCMarker key={index} ccpoint={point} />
+                  </CircleMarker>
+                ))}
+                {showCCinfo && (
+                  <div className="cc_info_container">
+                    <div onClick={closeCCinfo} className="trapezium"></div>
+                    <div className="arrow-left" onClick={closeCCinfo}></div>
+                    <CCinfo />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Events  of kiev  */}
+        {objectsShow && (
+          <div className="markers_div">
+            {isLoading || isloadinforgcc ? (
+              <div class="backdrop">
+                <div class="spinner">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
               </div>
             ) : (
               <>
@@ -192,12 +310,10 @@ const MainMap = () => {
                     radius={12}
                     color={point.color}
                     fillColor={point.color}
-                    fillOpacity={1} 
+                    fillOpacity={1}
                     stroke={true}
                     weight={2}
-                  >
-                    {/* <ObjectsMarker key={index} object={point} /> */}
-                  </CircleMarker>
+                  />
                 ))}
                 {showCCinfo && (
                   <div className="cc_info_container">
@@ -237,29 +353,56 @@ const MainMap = () => {
           </div>
         )}
 
-        <div className="markers_div">
-          {ccpointsKiev.map((point, index) => (
-            <CircleMarker
-              key={index}
-              center={[point.y, point.x]}
-              radius={12}
-              color={"#333333"}
-              fillColor={"#333333"}
-              fillOpacity={1}
-              stroke={true}
-              weight={2}
-            >
-              <CCMarker key={index} ccpoint={point} />
-            </CircleMarker>
-          ))}
-          {showCCinfo && (
-            <div className="cc_info_container">
-              <div onClick={closeCCinfo} className="trapezium"></div>
-              <div className="arrow-left" onClick={closeCCinfo}></div>
-              <CCinfo />
-            </div>
-          )}
-        </div>
+        {/* CC of kiev (not the markers and the events) when the events are not shown! */}
+        {/* {console.log(isloadinforgcc)} */}
+        {!objectsShow && (
+          <div className="markers_div">
+            {isloadinforgcc ? (
+              <div class="backdrop">
+                <div class="spinner">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+            ) : (
+              <>
+                {clusteredCCpoints.map((cluster, index) =>
+                  cluster.points.length === 1 ? (
+                    <CircleMarker
+                      key={index}
+                      center={[cluster.points[0].y, cluster.points[0].x]}
+                      radius={12}
+                      color={"#333333"}
+                      fillColor={"#333333"}
+                      fillOpacity={1}
+                      stroke={true}
+                      weight={2}
+                    >
+                      <CCMarker key={index} ccpoint={cluster.points[0]} />
+                    </CircleMarker>
+                  ) : (
+                    <Marker
+                      key={index}
+                      position={[cluster.center.y, cluster.center.x]}
+                      icon={createCustomClusterMarker(cluster, index)}
+                      eventHandlers={{
+                        click: () => handleClusterClick(cluster.center),
+                      }}
+                    />
+                  )
+                )}
+                {showCCinfo && (
+                  <div className="cc_info_container">
+                    <div onClick={closeCCinfo} className="trapezium"></div>
+                    <div className="arrow-left" onClick={closeCCinfo}></div>
+                    <CCinfo />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </MapContainer>
     </div>
   );

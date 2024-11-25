@@ -433,6 +433,8 @@ export function haversine(lat1, lon1, lat2, lon2) {
 }
 
 
+
+
 export const InitialccpointsKiev = [
   {
     id:1,
@@ -474,16 +476,406 @@ export const InitialccpointsKiev = [
     x: 30.511122625418672,
     y: 50.44195004787548,
     title: "Taras Shevchenko University (1837 building)",
-    subtitle:"check this is a subtitle check",
+    subtitle:"Volodymyrska St, 60, Kyiv, Ukraine, 01033",
     objecttag: ["Sightseeing"],
     other_tags: ["Ancient buildings", " Museums"],
-    imgurl: [],
-    link: "",
+    imgurl: ["https://www.riaoverseas.com/wp-content/uploads/2021/11/taras-shevchenko-national-university.jpg"],
+    link: "https://knu.ua/en/",
     description:
-      "The rocket attack damaged the facades and windows of the monument of history and architecture of national importance - the building of Taras Shevchenko University of Kyiv, built in 1837 (security No 34). The university archaeological museum located in the building also suffered minor damage.",
+      "Taras Shevchenko National University of Kyiv is today a classic university with a distinct research profile, and the leading contemporary academic and educational hub of Ukraine. With the independent Ukrainian nation arising, the University is facing new challenges and responsibilities.",
     event:[
     ]
   },
+  {
+    id:4,
+    t_array_id:null,
+    x: 30.52865550,
+    y: 50.45408280,
+    title: "National Philharmonic of Ukraine",
+    subtitle:"Volodymyrs'kyi descent, Kyiv, Ukraine, 02000",
+    objecttag: ["Sightseeing"],
+    other_tags: ["Theaters"],
+    imgurl: ["https://reukraine.shtab.net/uploads/f6aea648-e1f3-4db7-b3a3-951442a913d5.jpg"],
+    link: "https://filarmonia.com.ua/en",
+    description:
+      "The historic building was built at the end of the 19th century. Standing at the end of Khreshchatyk street near the European Square, it has hosted numerous Russian composers such as Sergei Rachmaninoff, Alexander Scriabin, and Pyotr Ilyich Tchaikovsky and famous opera singers like Leonid Sobinov and Feodor Chaliapin.",
+    event:[
+    ]
+  },
+  {
+    id:5,
+    t_array_id:null,
+    x: 30.51441200,
+    y: 50.44095700,
+    title: "Historical Building",
+    subtitle:"Київська область, м. Київ, вул. Терещенківська, 17",
+    objecttag: ["Sightseeing"],
+    other_tags: [],
+    imgurl: [],
+    link: "",
+    description:
+      "A historical building in the center of Kiev",
+    event:[
+    ]
+  },
+  {
+    id:6,
+    t_array_id:null,
+    x: 30.51397546,
+    y: 50.44181767,
+    title: "Khanenko Museum",
+    subtitle:"вулиця Терещенківська, 13, Київ, 01004",
+    objecttag: ["Museums"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://reukraine.shtab.net/uploads/a27b530c-0b5a-44fa-8f00-a7c6858b9eb3.jpg"],
+    link: "https://www.heritage.in.ua/en?77604088_page=21&9f130d51_page=51",
+    description:
+      "The Khanenko Museum (official name: The Bohdan and Varvara Khanenko National Museum of Arts) is an art museum located in Kyiv, in Ukraine, which holds the biggest and most valuable collections of European, Asian and Ancient art in the country.The museum was established in 1919 according to the will of art collector Bohdan Khanenko (1917) and the deed of gift to the Ukrainian Academy of Sciences signed by his wife Varvara in 1918.",
+    event:[
+    ]
+  },
+  {
+    id:7,
+    t_array_id:null,
+    x: 30.51436361,
+    y: 50.44118001,
+    title: "Taras Shevchenko Museum",
+    subtitle:"вулиця Терещенківська, 15, Київ, 01004",
+    objecttag: ["Museums"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://reukraine.shtab.net/uploads/%D0%B44_MVHB3ph.jpg"],
+    link: "https://www.shevchenko.ca/",
+    description:
+      "National Museum Taras Shevchenko is a museum in Kyiv, the capital city of Ukraine, dedicated to the life and work of the painter and national poet, Taras Shevchenko.The museum is located in the Tereshchenka City Palace on Taras Shevchenko Boulevard in Kyiv.[4][5] The building was constructed in 1841. In 1875, it was purchased by the Kyiv sugar producer and philanthropist Mykola Tereshchenko (1819–1903) and was converted into an Italian Renaissance-style city palace by the architects Peter Fedorov and Ronald Tustanovsky.",
+    event:[
+    ]
+  },
+  {
+    id:8,
+    t_array_id:null,
+    x: 30.51444710,
+    y: 50.44164110,
+    title: "Taras Shevchenko Park",
+    subtitle:"Київ м. вулиця Терещенківська 24 Парк імені Тараса Шевченка.",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://lh3.googleusercontent.com/p/AF1QipOvuF3Cz3aR3nqJf-QV4f5TaKQrZ94NCSpXAJ4q=s1360-w1360-h1020"],
+    link: "https://www.inyourpocket.com/kyiv/Shevchenko-Park_76353v",
+    description:
+      "Taras Shevchenko Park of Culture and Recreation is in the centre of Odesa. It is located in the central part of the city. It carries the name of Taras Shevchenko since 1954.After the conquest of Khadzhibey in 1795, certain fortifications existed near Cape Langeron. Among these was the Odesa fortress, which constituted part of the so-called the Dniester Defensive Line, while located in the center of Odesa fortress was the Saint Andrew bastion.",
+    event:[
+    ]
+  },
+  {
+    id:9,
+    t_array_id:null,
+    x: 30.51434240,
+    y: 50.44177000,
+    title: "Residential buidling",
+    subtitle:"Київ м. вул. Терещенківська 11 Житловий будинок",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://reukraine.shtab.net/uploads/cd9a13ce-587a-4998-89be-340d48382253.jpg"],
+    link: "",
+    description:
+      "A historical monument of local importance - a residential building erected in 1875-81",
+    event:[
+    ]
+  },
+  {
+    id:10,
+    t_array_id:null,
+    x: 30.51422400,
+    y: 50.44141370,
+    title: "National Museum of Art named after Bogdan and Varvara Khanenko ",
+    subtitle:"Київ м. вул. Терещенківська 15",
+    objecttag: ["Museums"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://reukraine.shtab.net/uploads/cd9a13ce-587a-4998-89be-340d48382253.jpg"],
+    link: "",
+    description:
+      " The National Museum of Art named after Bogdan and Varvara Khanenko is a museum of world art that presents the most significant collections of art in Ukraine in Europe, Asia and the Ancient World. The museum was founded in 1919 in accordance with the will of the collector Bogdan Khanenko (1917) and the gift of his wife Varvara in the name of the All-Ukrainian Academy of Sciences (1918).",
+    event:[
+    ]
+  },
+  {
+    id:11,
+    t_array_id:null,
+    x: 30.51492300,
+    y: 50.44221100,
+    title: "Hisrorical Building",
+    subtitle:"Київська область, м. Київ, вул. Терещенківська, 9",
+    objecttag: ["Sightseeing"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://lh5.googleusercontent.com/p/AF1QipNSAw6cs9PXox87VMWLIO1d-_CG7jocTP5OWevj=w408-h254-k-no"],
+    link: "No link is available",
+    description:
+      "",
+    event:[
+    ]
+  },
+  {
+    id:12,
+    t_array_id:null,
+    x: 30.51463086,
+    y: 50.44255818,
+    title: "National art gallery museum ",
+    subtitle:"вулиця Терещенківська, 9, Київ, 01004",
+    objecttag: ["Museums"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://reukraine.shtab.net/uploads/bb99eaee-8c2f-47db-875d-cd46b1fb5a49.jpg"],
+    link: "https://knag.museum/index.php/en/",
+    description:
+      "The National Art Museum of Ukraine, which was the first museum in Kyiv to be freely open to the public, was founded at the end of the 19th century by the efforts of Ukrainian intellectuals. Museum building was constructed under the project of Moscow architect Petro Boitsov in neo-classic style. ",
+    event:[
+    ]
+  },
+  {
+    id:13,
+    t_array_id:null,
+    x: 30.51241,
+    y: 50.44336,
+    title: "Hrushevsky Monument",
+    subtitle:"вулиця Володимирська, 55, Київ, 02000",
+    objecttag: ["Monuments"],
+    other_tags: ["",],
+    imgurl: ["https://reukraine.shtab.net/uploads/3116cb35-5afe-45de-a559-d213eb4ccbe2.jpg"],
+    link: "https://artsandculture.google.com/story/hrushevsky-monument-the-pioneer-amp-the-first-combat-test-balbek-bureau/DAUhfvL84r_1Jw?hl=en",
+    description:
+      "The bronze statue on the granite pedestal was unveiled on December 1, 1998. Its authors are sculptor Volodymyr Chepelyk, architects Mykola Kyslyy, Ruslan Kukharenko, Yuriy Melnychuk, and engineer Mykola Pechenov.",
+    event:[
+    ]
+  },
+  {
+    id:14,
+    t_array_id:null,
+    x: 30.51287157,
+    y: 50.4440507,
+    title: "Mykhailo Maksymovich National Library",
+    subtitle:"вулиця Володимирська, 58, Київ, 02000",
+    objecttag: ["Libraries"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://reukraine.shtab.net/uploads/2fa9b61a-c73b-40db-b818-b9e0a5727993.jpg"],
+    link: "https://artsandculture.google.com/story/hrushevsky-monument-the-pioneer-amp-the-first-combat-test-balbek-bureau/DAUhfvL84r_1Jw?hl=en",
+    description:
+      "Mykhailo Maksymovich National Library. This is the main scientific library of Taras Shevchenko Kyiv National University. It is located in Kyiv at Volodymyrska Street, 58, next to the Red Building of Kyiv University. The library was founded together with the university in 1834.",
+    event:[
+    ]
+  },
+  {
+    id:15,
+    t_array_id:null,
+    x: 30.49885800,
+    y: 50.43972100,
+    title: "Residential Building",
+    subtitle:"Київська область, м. Київ, вул. Жилянська, 96",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%BD%D0%B0_%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%96_%D0%96%D0%B8%D0%BB%D1%8F%D0%BD%D1%81%D1%8C%D0%BA%D1%96%D0%B9%2C_96.jpg/375px-%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%BD%D0%B0_%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%96_%D0%96%D0%B8%D0%BB%D1%8F%D0%BD%D1%81%D1%8C%D0%BA%D1%96%D0%B9%2C_96.jpg"],
+    link: "Міністерство культури та інформаційної політики",
+    description:
+      "Residential building of local importance",
+    event:[
+    ]
+  },
+  {
+    id:16,
+    t_array_id:null,
+    x: 30.51513600,
+    y: 50.44396140,
+    title: "Residential Building",
+    subtitle:"Київ м. вул. Терещенківська 5 Житловий будинок",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRTBH0Sj5MxZCCxVYgaZ0yE0PgEr7gZlitfw&s"],
+    link: "https://oktv.ua/ua/turizm/dostoprimechatelnosti-kieva/tereshhenkovskaja-5",
+    description:
+      "Residential building of local importance. A monument of history and architecture, erected in 1934-35",
+    event:[
+    ]
+  },
+  {
+    id:17,
+    t_array_id:null,
+    x: 30.51332214,
+    y: 50.44476771,
+    title: "Teacher's House",
+    subtitle:"вулиця Володимирська, 57, Київ, 02000",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://reukraine.shtab.net/uploads/%D0%B41_sm87Aao.jpg"],
+    link: "https://www.wmf.org/project/teachers-house",
+    description:
+      "The Kyiv City Teacher's House also known as the Central Council House is a historical building located at 57 Volodymyrska Street, in Kyiv, Ukraine.Currently, it is mainly occupied by the Ukrainian Trade Union of workers of Education and Science in Kyiv. It also houses the Pedagogical museum, the museum of Ukrainian Revolution (1917-1920), the State Pedagogical and Science Library of Sukhomlynsky, and the Cultural Center Kyianochka. Both museums are located on the second floor.",
+    event:[
+    ]
+  },
+  {
+    id:18,
+    t_array_id:null,
+    x: 30.40393054,
+    y: 50.48269498,
+    title: "Church of St. Joasaph of Belogorodsky",
+    subtitle:"м. Київ, вул. Стеценка, 12",
+    objecttag: ["Religious Buildings"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://reukraine.shtab.net/uploads/%D0%B412_9kimq6F.jpg"],
+    link: "https://www.wmf.org/project/teachers-house",
+    description:"",
+    event:[
+    ]
+  },
+  {
+    id:19,
+    t_array_id:null,
+    x: 30.48212417,
+    y: 50.46091873,
+    title: "Ministry of Culture and Information Policy",
+    subtitle:"Київська область, м. Київ, вул. Дегтярівська, 5",
+    objecttag: ["Monuments"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDs-Vsg_caryp1x5nfh7saBUWFg3XLA2yw6g&s"],
+    link: "https://www.wmf.org/project/teachers-house",
+    description:"",
+    event:[
+    ]
+  },
+  {
+    id:20,
+    t_array_id:null,
+    x: 30.49987400,
+    y: 50.43915600,
+    title: "Ministry of Culture and Information Policy",
+    subtitle:"Київська область, м. Київ, вул. Дегтярівська, 5",
+    objecttag: ["Monuments",],
+    other_tags: ["Monuments",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDs-Vsg_caryp1x5nfh7saBUWFg3XLA2yw6g&s"],
+    link: "https://www.wmf.org/project/teachers-house",
+    description:"",
+    event:[
+    ]
+  },
+  {
+    id:21,
+    t_array_id:null,
+    x:  30.518005315700258,
+    y: 50.459131477066116,
+    title: "St. Andrew's Church",
+    subtitle:"Andriivs'kyi descent, 23, Kyiv, Ukraine, 02000",
+    objecttag: ["Religious Buildings"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://upload.wikimedia.org/wikipedia/commons/2/2a/%D0%90%D0%BD%D0%B4%D1%80%D1%96%D1%97%D0%B2%D1%81%D1%8C%D0%BA%D0%B0_%D1%86%D0%B5%D1%80%D0%BA%D0%B2%D0%B0_DJI_0176.jpg"],
+    link: "https://www.europeanheritageawards.eu/winners/st-andrews-church/",
+    description:"St Andrew's Church is an Orthodox church in Kyiv, constructed between 1747 and 1754 to a design by the Italian architect Bartolomeo Rastrelli. It is a rare example of Elizabethan Baroque in Ukraine.",
+    event:[
+    ]
+  },
+  {
+    id:22,
+    t_array_id:null,
+    x: 30.524928379824814,
+    y: 50.45315748071769,
+    title: "Cathedral of St. Alexander, Kyiv",
+    subtitle:"Andriivs'kyi descent, 23, Kyiv, Ukraine, 02000",
+    objecttag: ["Religious Buildings"],
+    other_tags: ["Monuments",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsOX1c9MV9aDl1F1cR4BrSSa2MZoEi4WBbXw&s"],
+    link: "https://www.europeanheritageawards.eu/winners/st-andrews-church/",
+    description:"The Co-Cathedral of St. Alexander also called Cathedral of St. Alexander of Kyiv is a Latin Catholic co-cathedral located in Kyiv, the capital of Ukraine. The church was built between 1817 and 1842 in a cruciform plan, with a dome at the intersection of the aisles in the style of classicism.",
+    event:[
+    ]
+  },
+  {
+    id:23,
+    t_array_id:null,
+    x: 30.517302495022328,
+    y: 50.46515695953386, 
+    title: "Kontraktova Square",
+    subtitle:"Kyiv, Ukraine, 02000",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHDAFKcyx4iwBEfDqwPiBhOeU1rQPXVJCPVg&s"],
+    link: "https://www.europeanheritageawards.eu/winners/st-andrews-church/",
+    description:"Square of Contracts or Contract Square is a square in the historic Podil neighborhood of Kyiv, the capital of Ukraine. The square is an important economic, cultural, and transport center of the Podil, containing numerous architectural and historical monuments.",
+    event:[
+    ]
+  },
+  {
+    id:24,
+    t_array_id:null,
+    x: 30.531495,
+    y: 50.452606, 
+    title: "Water Museum",
+    subtitle:"Mykhaila Hrushevskoho St, 1B, Kyiv, Ukraine, 02000",
+    objecttag: ["Museums"],
+    other_tags: ["",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTyblwM7SPezT8WbBuQloV63Tpl3uATWryjw&s"],
+    link: "https://en.wikipedia.org/wiki/Kyiv_Water_Museum",
+    description:"The Kyiv Water Museum (official name the Water-Information Centre) is an educational centre that occupies one of the buildings from the early centralised water-supply system in the city, which was built at the middle of the 19th century. It is located in Khreshchatyi Park. The Water-Information Centre gives information about water resources and their rational consumption. The exhibition demonstrates the history of Kyiv's water supply system, water treatment and waste water treatment in contemporary Kyiv, while also showing water's role in people's activities using interesting and interactive examples.",
+    event:[
+    ]
+  },
+  {
+    id:25,
+    t_array_id:null,
+    x: 30.52134903,
+    y: 50.42103322, 
+    title: "National Palace of Arts",
+    subtitle:"Велика Васильківська, 103, Київ, 03150",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing",],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOvbNKMEOrj1BpC_sXZqY7mlBXtAkyis5hCQ&s"],
+    link: "https://palac.com.ua/en/",
+    description:"National Palace of Arts Ukraina or Palace Ukraina is one of the main theatre venues for official events along with Palace of Sports in Kyiv, Ukraine. The venue is a state company administered by the State Directory of Affairs. The main concert hall has a capacity of 3,714 people",
+    event:[
+    ]
+  },
+  {
+    id:26,
+    t_array_id:null,
+    x:  30.500787,
+    y: 50.449624, 
+    title: "Baron Shteingel's castle",
+    subtitle:"Heorhiivs'kyi Ln, 2, Kyiv, Ukraine, 02000",
+    objecttag: ["Ancient buildings"],
+    other_tags: ["Monuments","Sightseeing"],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQk6neEdb_kEmtfe1y00Lv9-7Bqy6GofsOHw&s"],
+    link: "https://warmuseum.kyiv.ua/_eng/visitors/time/",
+    description:"The Baron's Castle  is a complex of the mansion , outbuilding and park of Baron Rudolph Shteingel, the father of Fedor Shteingel , Secretary General of Trade and Industry of the Central Rada and Ambassador of the Ukrainian State in Berlin .",
+    event:[
+    ]
+  },
+  {
+    id:27,
+    t_array_id:null,
+    x:  30.51249391413111,
+    y: 50.4521918609097, 
+    title: "Brama Zaborovsʹkoho",
+    subtitle:"Heorhiivs'kyi Ln, 2, Kyiv, Ukraine, 02000",
+    objecttag: ["Monuments"],
+    other_tags: ["Sightseeing"],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHkgaJlvxmBr0XAm-43g9F_ckVtnRIKZJXhQ&s"],
+    link: "https://www.readingkyiv.net/en/sights/zaborovsky-gate/",
+    description:"This masterpiece of Baroque architecture is located in the narrow Heorhiivskyi Lane. The gate was built in 1745, probably by Johann Gottfried Schädel (1680-1752). The architect is also known for reworking the original design of the Lavra belfry and working on the reconstruction of the belfry of St. Sophia Cathedral and the Old Academic Building of the Kyiv-Mohyla Academy.",
+    event:[
+    ]
+  },
+  {
+    id:28,
+    t_array_id:null,
+    x:  30.530264852584732,
+    y: 50.45195072468256, 
+    title: "Kyiv Academic Puppet Theatre",
+    subtitle:"Mykhaila Hrushevskoho St, 1A, Kyiv, Ukraine, 01001",
+    objecttag: ["Theaters"],
+    other_tags: ["Sightseeing", "Monuments"],
+    imgurl: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ_uiKbGG8CdpRuflt-6HJqHWus_o4CMW3hg&s"],
+    link: "https://en.wikipedia.org/wiki/Kyiv_Academic_Puppet_Theatre",
+    description:"The Kyiv Academic Puppet Theatre is a theatre in Kyiv in Ukraine. It was founded on October 27, 1927. It is the oldest puppet theatre in Kyiv. The current building was presented to the theatre company on 19th December 2005 and it was the first time they had a purpose built building to host the theatre.",
+    event:[
+    ]
+  },
+
 
 ]
 

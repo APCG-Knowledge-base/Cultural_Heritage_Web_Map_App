@@ -26,13 +26,19 @@
   padding-bottom: 4px;
 }
 
-.titlecc h2 {
+.titlecc h2 a {
+  color: #ffffff;
+  text-decoration: none;
   font-family: 'Pacifico', cursive;
   font-weight: normal;
   padding: 20px;
   margin: 0;
   padding-top: 0;
   font-size: 15px;
+}
+.titlecc h2 a:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
 }
 
 .iconcc {

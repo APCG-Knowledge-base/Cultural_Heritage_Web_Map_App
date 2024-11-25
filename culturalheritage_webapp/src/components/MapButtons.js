@@ -18,6 +18,7 @@ import {
   faCloud,
   faPlus,
   faUser,
+  faHouseDamage,
 } from "@fortawesome/free-solid-svg-icons";
 import AirIcon from "@material-ui/icons/Cloud";
 import { useSelector, useDispatch } from "react-redux";
@@ -32,10 +33,9 @@ import { useNavigate } from "react-router-dom";
 import ButtonDetailed from "./ButtonDetailed.js";
 import { aq_devices } from "../common/util.js";
 import { ccpoints } from "../common/util.js";
-import {haversine} from "../common/util.js";
-import axios from 'axios';
+import { haversine } from "../common/util.js";
+import axios from "axios";
 import { InitialccpointsKiev } from "../common/util.js";
-
 
 const MapButtons = (props) => {
   const userLocation = useSelector((state) => state.userLocation);
@@ -56,8 +56,8 @@ const MapButtons = (props) => {
   const airpoluhover = useSelector((state) => state.airpoluhover);
   const addeventhover = useSelector((state) => state.addeventhover);
   const loginhover = useSelector((state) => state.loginhover);
-  const transformedData  = useSelector((state) => state.transformedData );
-  const ccpointsKiev  = useSelector((state) => state.ccpointsKiev );
+  const transformedData = useSelector((state) => state.transformedData);
+  const ccpointsKiev = useSelector((state) => state.ccpointsKiev);
   const dispatch = useDispatch();
   const [classesCC, setCC] = useState("ccbtn");
   const [classesLand, setLand] = useState("lndbtn");
@@ -71,7 +71,6 @@ const MapButtons = (props) => {
   const [classesProfile, setProfile] = useState("profilee");
   const [classesInfo, setInfoclass] = useState("infobtn");
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     let t = localStorage.getItem("token");
@@ -171,20 +170,19 @@ const MapButtons = (props) => {
           .map((device) => getairdatano2(device))
       ).then((results) => {
         dispatch(buttonsActions.setno2List(results));
-      });  
+      });
     } else {
       setAir("airbtn");
       dispatch(buttonsActions.setno2List([]));
     }
   };
-
   const getairdatano2 = async (device) => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so we add 1 and pad with '0' if necessary
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
     const day = String(currentDate.getDate()).padStart(2, "0");
     const formattedDate = `${year}-${month}-${day}`;
-    const base_url = `https://www.saveecobot.com/en/maps/marker.json?marker_id=${device.id}&marker_type=device&pollutant=no2_ppb&rand=${formattedDate}`;
+    const base_url = `http://localhost:5000/api/get-air-data?device_id=${device.id}&formattedDate=${formattedDate}`;
     const x = device.x;
     const y = device.y;
     const id = device.id;
@@ -248,18 +246,19 @@ const MapButtons = (props) => {
     }
   };
 
-
-  function correlateData(ccpointsKiev, t, radius = 0.02) { // radius in km
-    return ccpointsKiev.map(ccpoint => {
+  function correlateData(ccll, t, radius = 0.02) {
+    // radius in km
+    return ccll.map((ccpoint) => {
       const updatedCcpoint = { ...ccpoint };
       let correlated = false;
-      t.forEach(tpoint => {
-        console.log("check")
-        const distance = haversine(updatedCcpoint.y, updatedCcpoint.x, parseFloat(tpoint.y), parseFloat(tpoint.x));
+      t.forEach((tpoint) => {
+        const distance = haversine(
+          updatedCcpoint.y,
+          updatedCcpoint.x,
+          parseFloat(tpoint.y),
+          parseFloat(tpoint.x)
+        );
         if (distance <= radius) {
-          console.log(ccpoint.id)
-          console.log(tpoint.id)
-          console.log("yes")
           correlated = true;
           updatedCcpoint.t_array_id = tpoint.id; // Add t_array_id to ccpoint
         }
@@ -271,33 +270,33 @@ const MapButtons = (props) => {
     });
   }
 
-
-  const objects_registered = async () => {
+  const objects_registered = async (cclist, evntpoint) => {
     const url = `http://localhost:5000/api/get-building-data`;
     try {
       const res = await fetch(url);
       const text = await res.text(); // Get the response as text
       // console.log("Response text:", text); // Log the response text
-      
+
       // Replace single quotes with double quotes
       const modifiedText = text.replace(/'/g, '"');
-      const modifiedText2 = modifiedText.replace(/None/g, 'null');
-      const modifiedText3 = modifiedText2.replace(/True/g, 'true');
-      const modifiedText4 = modifiedText3.replace(/False/g, 'false');
-      
+      const modifiedText2 = modifiedText.replace(/None/g, "null");
+      const modifiedText3 = modifiedText2.replace(/True/g, "true");
+      const modifiedText4 = modifiedText3.replace(/False/g, "false");
+
       // Attempt to parse the modified response text as JSON
       const data = JSON.parse(modifiedText4);
-      console.log("i fetched all the data from the object registered")
-      console.log(data);
+      console.log("i fetched all the data from the object registered");
+      // console.log(data);
       // Check if data is valid and contains the results array
       if (data && Array.isArray(data.results)) {
         // Function to determine the color based on the restored value
         const getColor = (restored) => {
-          return restored ? 'orange' : 'red';
+          return restored ? "orange" : "red";
         };
+        console.log(evntpoint);
 
         // Transform the data
-        const t = data.results.map(item => ({
+        const t = data.results.map((item) => ({
           id: item.id,
           x: item.longitude,
           y: item.latitude,
@@ -307,13 +306,17 @@ const MapButtons = (props) => {
               <a href="#${item.id}">Station Details</a>
             </div>
           `,
-          ...item // Include other properties if necessary
+          ...item, // Include other properties if necessary
         }));
+        if (Object.keys(evntpoint).length !== 0) {
+          t.push(evntpoint);
+        }
 
-        const updatedCcpoints = correlateData(ccpointsKiev, t);
-        console.log(updatedCcpoints)
+        const updatedCcpoints = correlateData(cclist, t);
+        // console.log(updatedCcpoints)
         // Set the transformed data in state
         dispatch(buttonsActions.setKievccpoints(updatedCcpoints));
+        console.log(t);
         dispatch(buttonsActions.setTransformeddata(t));
       } else {
         console.error("Invalid data format", data);
@@ -323,10 +326,66 @@ const MapButtons = (props) => {
       console.log("Here is an error", err);
       return null;
     }
+  };
+  async function findEvents(ccpointslist) {
+    function addEventToPoint(existingPoint, newEvents) {
+      return {
+        ...existingPoint,
+        event: [...existingPoint.event, ...newEvents],
+      };
+    }
+
+    let url = "http://localhost:8080/events";
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    const events = data.events;
+    // console.log("these are the existing events:", events);
+
+    const updatedList = [];
+    let evntpoint = {};
+
+    ccpointslist.forEach((itemA) => {
+      const matchingEvents = events.filter(
+        (itemB) => itemA.title === itemB.monument_reference
+      );
+
+      if (matchingEvents.length > 0) {
+        const newEvents = matchingEvents.map((event) => ({
+          after: event.image,
+          happend: event.date,
+          infotxt: event.description,
+          restored: false,
+          source: event.title,
+        }));
+
+        // Create the evntpoint based on the first matching event
+        evntpoint = {
+          x: itemA.x,
+          y: itemA.y,
+          color: "red",
+          device_content: "nothing here",
+          is_truepic: false,
+          restored: false,
+          tip_id: 32,
+          id: false,
+        };
+
+        const updatedObject = addEventToPoint(itemA, newEvents);
+        updatedList.push(updatedObject);
+      } else {
+        updatedList.push(itemA);
+      }
+    });
+
+    return { updatedList, evntpoint };
   }
 
-
-  const damagedBuildingsHandler = () => {
+  const damagedBuildingsHandler = async () => {
     setGrm("grmbtn");
     setLand("lndbtn");
     setAir("airbtn");
@@ -336,62 +395,22 @@ const MapButtons = (props) => {
     dispatch(buttonsActions.setno2List([]));
     dispatch(buttonsActions.objregister(!objectsShow));
     if (!objectsShow) {
+      // console.log("yo clicked");
       dispatch(buttonsActions.isccinfoopen(false));
       setDamaged("clicked");
-      objects_registered();
+      const { updatedList, evntpoint } = await findEvents(ccpointsKiev);
+      // console.log("lst:", updatedList);
+      // console.log("evnts:", evntpoint);
+      await objects_registered(updatedList, evntpoint);
       // damagedbuildingbyid();
-    }else {
+    } else {
       dispatch(buttonsActions.isccinfoopen(false));
       dispatch(buttonsActions.setKievccpoints(InitialccpointsKiev));
       setDamaged("dmgd");
 
       // dispatch(buttonsActions.setno2List([]));
     }
-  }
-
-
-  // async function findEvents(ccpointslist) {
-  //   function addEventToPoint(existingPoint, newEvent) {
-  //     return {
-  //       ...existingPoint,
-  //       event: [...existingPoint.event, newEvent],
-  //     };
-  //   }
-
-  //   const token = getAuthToken();
-  //   let url = "http://localhost:8080/events";
-  //   const response = await fetch(url, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // Authorization: "Bearer " + token,
-  //     },
-  //   });
-  //   const data = await response.json();
-  //   // console.log(data);
-  //   const events = data.events;
-  //   const updatedList = [];
-
-  //   ccpointslist.forEach((itemA) => {
-  //     const matchingItemB = events.find(
-  //       (itemB) => itemA.title === itemB.monument_reference
-  //     );
-  //     if (matchingItemB) {
-  //       // Create a new object with properties from both A and B
-  //       const updatedObject = addEventToPoint(itemA, matchingItemB) 
-  //       // console.log(updatedObject);
-  //       updatedList.push(updatedObject);
-  //     } else {
-  //       // console.log(itemA);
-  //       // If there's no match in listB, add the original object from listA
-  //       updatedList.push(itemA);
-  //     }
-  //   });
-  //   console.log(updatedList)
-  //   setUpdatedCcpoints(updatedList)
-  // }
-
-  
+  };
 
   const loginredirect1 = () => {
     console.log("this is the login status: ", isloggedin);
@@ -480,7 +499,7 @@ const MapButtons = (props) => {
 
   return (
     <div className="main-container">
-      <div className="btn-container">
+      {/* <div className="btn-container">
         <FontAwesomeIcon
           className={classesCC}
           icon={faLandmark}
@@ -494,6 +513,23 @@ const MapButtons = (props) => {
           <div>
             <div className="hv">Cultural Heritage Map</div>
             <div className="rhombus"></div>
+          </div>
+        )}
+      </div> */}
+      <div className="btn-container">
+        <FontAwesomeIcon
+          icon={faHouseDamage}
+          className={classesDamaged}
+          size="2x"
+          id="dmgd"
+          onMouseOver={handleHoverdamagedin}
+          onMouseOut={handleHoverdamagedout}
+          onClick={damagedBuildingsHandler}
+        />
+        {damagebuildhover && (
+          <div>
+            <div className="rhombus"></div>
+            <div className="hv">Damaged Buildings</div>
           </div>
         )}
       </div>
@@ -512,24 +548,6 @@ const MapButtons = (props) => {
           <div>
             <div className="rhombus"></div>
             <div className="hv">Air Quality Map</div>
-          </div>
-        )}
-      </div>
-
-      <div className="btn-container">
-        <FontAwesomeIcon
-          icon={faBiohazard}
-          className={classesDamaged}
-          size="2x"
-          id="dmgd"
-          onMouseOver={handleHoverdamagedin}
-          onMouseOut={handleHoverdamagedout}
-          onClick={damagedBuildingsHandler}
-        />
-        {damagebuildhover && (
-          <div>
-            <div className="rhombus"></div>
-            <div className="hv">Damaged Buildings</div>
           </div>
         )}
       </div>
@@ -603,6 +621,7 @@ const MapButtons = (props) => {
         )}
       </div>
 
+      {console.log(userName)}
       {!isloggedin ? (
         <div className="btn-container">
           <FontAwesomeIcon
@@ -628,7 +647,7 @@ const MapButtons = (props) => {
             onMouseOver={handleHoverlogin}
             onMouseOut={handleHoverloginout}
           >
-            {userName.toUpperCase()}
+            {"C"}
           </div>
           {loginhover && (
             <div>

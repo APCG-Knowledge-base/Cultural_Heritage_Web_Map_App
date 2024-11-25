@@ -37,6 +37,7 @@ const initialState = {
     event:[],
   },
   ccpointsKiev : InitialccpointsKiev,
+  isloadinforgcc:false,
 
 };
 
@@ -70,6 +71,9 @@ const buttonsSlice = createSlice({
     },
     isobjinfoopen(state, action) {
       state.showObjinfo = action.payload;
+    },
+    isloadingcc(state, action) {
+      state.isloadinforgcc = action.payload;
     },
     monumentselection(state, action) {
       state.selectedMonument = action.payload;
