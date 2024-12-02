@@ -42,6 +42,12 @@ To use this application, ensure you have the following:
 
 ---
 
+
+## **Ownership**
+This project is owned and maintained by the following individuals or organizations:
+National Observatory of Athens, Greece - Bente Lilja Bye, Norway - Katerina Zourou, Greece.
+
+
 ## **Acknowledgments**
 Special thanks to the following contributors:
 
@@ -62,11 +68,11 @@ Special thanks to the following contributors:
 
 - **Stefania Oikonomou**  
   - Communication and Outreach, Web2Learn  
-
-- **Katerina Zourou**  
-  - Co-founder, Space4CC  
+  
 
 ---
 
-## **License**
-This project is licensed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/).
+## **Attribution**
+This project is licensed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/), with ownership attributed to the National Observatory of Athens, Bente Lilja Bye & Katerina Zourou. All rights reserved unless otherwise stated.
+
+Copyright © National Observatory of Athens, 2024 
