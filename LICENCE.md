@@ -1,7 +1,8 @@
-# Creative Commons Attribution 4.0 International (CC BY 4.0)
+# Copyright © National Observatory of Athens, Greece - Bente Lilja Bye, Norway - Katerina Zourou, Greece, 2024 
+This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0).
 
 ## You are free to:
-- **Share** — copy and redistribute the material in any medium or format.
+- **Share** —  copy and redistribute the material in any medium or format
 - **Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
 
 ## Under the following terms:
@@ -10,4 +11,5 @@
 
 ---
 
-For more details, read the full license here: [CC BY 4.0 Legal Code](https://creativecommons.org/licenses/by/4.0/legalcode).
+
+Full license: https://creativecommons.org/licenses/by/4.0/legalcode
